@@ -4,19 +4,23 @@ import 'package:timer_count_down/timer_controller.dart';
 import '../../constants.dart';
 import '../Widgets/card.dart';
 import 'package:timer_count_down/timer_count_down.dart';
+import '../brains.dart';
+import 'input_page.dart';
+import 'workout_page.dart';
 
-class InputPageTwo extends StatefulWidget {
-  const InputPageTwo({Key? key}) : super(key: key);
+class StandingTestPage extends StatefulWidget {
+  final double age;
+  final double suppineHr;
+  StandingTestPage({required this.age, required this.suppineHr});
 
   @override
-  _InputPageTwoState createState() => _InputPageTwoState();
+  _StandingTestPageState createState() => _StandingTestPageState();
 }
 
-class _InputPageTwoState extends State<InputPageTwo> {
+class _StandingTestPageState extends State<StandingTestPage> {
   final CountdownController _controller = new CountdownController();
-  double age_val = 50;
   double restingRateval = 130;
-  double maxHeartRate = 130;
+  int maxHeartRate = 130;
   int minutes = 0;
   int seconds = 0;
   int standingTestFlex = 8;
@@ -29,7 +33,7 @@ class _InputPageTwoState extends State<InputPageTwo> {
       appBar: AppBar(
           // centerTitle: false,
           elevation: 0,
-          title: Text('POTS',
+          title: Text('POTS APP',
               style: TextStyle(
                   color: kTitleColor,
                   fontWeight: FontWeight.w900,
@@ -156,80 +160,7 @@ class _InputPageTwoState extends State<InputPageTwo> {
             ),
           ),
 
-          // Expanded(
-          //   flex: 2,
-          //   child: ReusableCard(
-          //     boxStyle: generalStyle,
-          //     cardChild: Column(
-          //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //         children: <Widget>[
-          //           Text('MAX HR', style: kCardTitleStyle),
-          //           Text("Do You know your max HR?"),
-          //           Row(
-          //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //               children: <Widget>[
-          //                 ElevatedButton(
-          //                   style:
-          //                       ElevatedButton.styleFrom(primary: kTitleColor),
-          //                   child: Text("YES"),
-          //                   onPressed: () {},
-          //                 ),
-          //                 ElevatedButton(
-          //                     style: ElevatedButton.styleFrom(
-          //                         primary: kTitleColor),
-          //                     child: Text("NO"),
-          //                     onPressed: () {})
-          //               ]),
-          //           Row(
-          //             mainAxisAlignment: MainAxisAlignment.center,
-          //             children: [
-          //               Text(maxHeartRate.toInt().toString(), style: kValStyle),
-          //               Text('b/m')
-          //             ],
-          //           ),
-          //           AbsorbPointer(
-          //             absorbing: absordMaxHR,
-          //             child: Slider(
-          //               value: maxHeartRate,
-          //               min: 0,
-          //               max: 250,
-          //               divisions: 250,
-          //               onChanged: (double value) {
-          //                 setState(() {
-          //                   maxHeartRate = value;
-          //                 });
-          //               },
-          //               activeColor: kTitleColor,
-          //             ),
-          //           ),
-          //         ]),
-          //   ),
-          // ),
-          // Expanded(
-          //   child: Container(
-          //     width: double.infinity,
-          //     color: kTitleColor,
-          //     child: Column(
-          //       mainAxisAlignment: MainAxisAlignment.center,
-          //       children: [
-          //         GestureDetector(
-          //           child: Text(
-          //             "LETS GET STARTED!",
-          //             textAlign: TextAlign.center,
-          //             style: TextStyle(
-          //               color: kBackground,
-          //               fontWeight: FontWeight.w900,
-          //               fontSize: 25
-          //             ),
-          //           ),
-          //           onTap: (){
-          //             Navigator.pushNamed(context, '/inputPage2');
-          //           },
-          //         ),
-          //       ],
-          //     )
-          //   ),
-          // )
+          //Generate Workout Button
           Visibility(
             visible: generateWorkoutIsVisible,
             child: Expanded(
@@ -246,11 +177,16 @@ class _InputPageTwoState extends State<InputPageTwo> {
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w900,
-                                  fontSize: 20)),
+                                  fontSize: 20
+                                )
+                              ),
                         ],
                       ),
                       onTap: () {
-                        Navigator.pushNamed(context, '/schedulePage');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SchedulePage()));
                       })),
             ),
           ),

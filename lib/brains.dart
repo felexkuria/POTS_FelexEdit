@@ -5,9 +5,9 @@ import 'Screens/stand_test.dart';
 class HrCalculate{
   HrCalculate({required this.age, required this.tenHr, required this.suppineHr});
 
-  int age;
-  int tenHr;
-  int suppineHr;
+  final int age;
+  final int tenHr;
+  final int suppineHr;
 
   //Calculation for Max HR with formula provided by docotr - int
   int maxHr(){
@@ -26,7 +26,6 @@ class HrCalculate{
   double midMaxaxSteadyState(){
     return seventyFiveOfHRR()+suppineHr;
   }
-  
 }
 
 

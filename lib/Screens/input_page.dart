@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
-
+import 'package:pots_new/Screens/stand_test.dart';
 import '../../constants.dart';
 import 'package:flutter/material.dart';
 import '../Widgets/card.dart';
 
 class Input extends StatefulWidget {
+  const Input({ Key? key }) : super(key: key);
+
   @override
   _InputState createState() => _InputState();
 }
@@ -137,7 +139,11 @@ class _InputState extends State<Input> {
                   ],
                 ),
                 onTap: () {
-                  Navigator.pushNamed(context, '/standTest');
+                  Navigator.push(context,
+                    MaterialPageRoute(
+                      builder: (context) => StandingTestPage(age: age_val, suppineHr: supine_HR)
+                    )
+                  );
                 }
               )
             ),
