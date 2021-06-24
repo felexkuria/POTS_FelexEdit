@@ -5,17 +5,19 @@ import 'package:flutter/material.dart';
 import '../Widgets/card.dart';
 
 class Input extends StatefulWidget {
-  const Input({ Key? key }) : super(key: key);
+  // final double ageVal;
+  // final double supineHR;
+  // final double maxHR;
 
+  // Input({required this.ageVal, required this.supineHR, required this.maxHR});
+  
   @override
   _InputState createState() => _InputState();
 }
 
 class _InputState extends State<Input> {
   double age_val = 50;
-  double restingRateval = 130;
   double supine_HR = 100;
-  double maxHeartRate = 130;
 
   @override
   Widget build(BuildContext context) {
@@ -139,9 +141,13 @@ class _InputState extends State<Input> {
                   ],
                 ),
                 onTap: () {
-                  Navigator.push(context,
+                  Navigator.push(
+                    context, 
                     MaterialPageRoute(
-                      builder: (context) => StandingTestPage(age: age_val, suppineHr: supine_HR)
+                      builder: (context) => StandingTestPage(
+                        age: age_val,
+                        suppineHeartRate: supine_HR,
+                      )
                     )
                   );
                 }

@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:pots_new/main.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import '../../constants.dart';
 import '../Widgets/card.dart';
@@ -9,29 +10,44 @@ import 'input_page.dart';
 import 'workout_page.dart';
 
 class StandingTestPage extends StatefulWidget {
+  
+  StandingTestPage({required this.age, required this.suppineHeartRate});
   final double age;
-  final double suppineHr;
-  StandingTestPage({required this.age, required this.suppineHr});
+  final double suppineHeartRate;
 
   @override
   _StandingTestPageState createState() => _StandingTestPageState();
 }
 
 class _StandingTestPageState extends State<StandingTestPage> {
+
   final CountdownController _controller = new CountdownController();
-  double restingRateval = 130;
-  int maxHeartRate = 130;
+  //HR after 10 minutes  
+  int tenMinuteHR = 130;
+
+  //variables required for the minutes and seconds
   int minutes = 0;
   int seconds = 0;
+
   int standingTestFlex = 8;
+  
+  
+  //works to hide and unhide the bottom button and the HR after 10 minutes
   bool isVisible = false;
   bool generateWorkoutIsVisible = false;
 
+  //assigning variables from object something to values
+
+
   @override
   Widget build(BuildContext context) {
+    
+    //variables which repersent the 
+    int age = widget.age.toInt();
+    int suppineHr = widget.suppineHeartRate.toInt();
+
     return Scaffold(
       appBar: AppBar(
-          // centerTitle: false,
           elevation: 0,
           title: Text('POTS APP',
               style: TextStyle(
@@ -135,7 +151,7 @@ class _StandingTestPageState extends State<StandingTestPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(restingRateval.toInt().toString(),
+                          Text(tenMinuteHR.toInt().toString(),
                               style: kValStyle),
                           Text('b/m')
                         ],
@@ -143,13 +159,13 @@ class _StandingTestPageState extends State<StandingTestPage> {
                       AbsorbPointer(
                         absorbing: false,
                         child: Slider(
-                          value: restingRateval,
+                          value: tenMinuteHR.toDouble(),
                           min: 0,
                           max: 250,
                           divisions: 250,
                           onChanged: (double value) {
                             setState(() {
-                              restingRateval = value;
+                              tenMinuteHR = value.toInt();
                             });
                           },
                           activeColor: kTitleColor,
@@ -183,10 +199,7 @@ class _StandingTestPageState extends State<StandingTestPage> {
                         ],
                       ),
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SchedulePage()));
+                        Navigator.pushNamed(context, '/schedulePage');
                       })),
             ),
           ),

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'Screens/input_page.dart';
 import 'Screens/stand_test.dart';
+import 'constants.dart';
 
-class HrCalculate{
-  HrCalculate({required this.age, required this.tenHr, required this.suppineHr});
+class TargetHrCalculate{
+  TargetHrCalculate({required this.age, required this.tenHr, required this.suppineHr});
 
   final int age;
   final int tenHr;
@@ -11,7 +12,7 @@ class HrCalculate{
 
   //Calculation for Max HR with formula provided by docotr - int
   int maxHr(){
-    return 220-age;
+    return ageSubtractionConstants - age;
   }
 
   //Heart Rate Reserve Calculation - int
@@ -19,14 +20,16 @@ class HrCalculate{
     return maxHr() - suppineHr;
   }
 
-  double seventyFiveOfHRR(){
-    return heartRateReserve()*.75;
+  double percentOfHRR(){
+    return heartRateReserve() * percentInHRR;
   }
 
   double midMaxaxSteadyState(){
-    return seventyFiveOfHRR()+suppineHr;
+    return percentOfHRR()+suppineHr;
   }
+
 }
+
 
 
 

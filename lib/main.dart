@@ -8,7 +8,7 @@ import 'Screens/workout_page.dart';
 void main() {
   runApp(MyApp());
 }
-Input something = new Input();
+
 
 class MyApp extends StatelessWidget {
   @override
@@ -21,11 +21,14 @@ class MyApp extends StatelessWidget {
 
         scaffoldBackgroundColor: kBackground,
       ),
-      
+
       home: Input(),
+
+      // initialRoute: '/input',
+
       // routes:{
       //   '/input': (context) => Input(),
-      //   '/standTest': (context) => StandingTestPage(age: something.age_val, suppineHr: something.suppine),
+      //   '/standTest': (context) => StandingTestPage(),
       //   '/schedulePage': (context) => SchedulePage()
       // }
     );
