@@ -10,7 +10,6 @@ import 'input_page.dart';
 import 'workout_page.dart';
 
 class StandingTestPage extends StatefulWidget {
-  
   StandingTestPage({required this.age, required this.suppineHeartRate});
   final double age;
   final double suppineHeartRate;
@@ -20,9 +19,8 @@ class StandingTestPage extends StatefulWidget {
 }
 
 class _StandingTestPageState extends State<StandingTestPage> {
-
   final CountdownController _controller = new CountdownController();
-  //HR after 10 minutes  
+  //HR after 10 minutes
   int tenMinuteHR = 130;
 
   //variables required for the minutes and seconds
@@ -30,19 +28,16 @@ class _StandingTestPageState extends State<StandingTestPage> {
   int seconds = 0;
 
   int standingTestFlex = 8;
-  
-  
+
   //works to hide and unhide the bottom button and the HR after 10 minutes
   bool isVisible = false;
   bool generateWorkoutIsVisible = false;
 
   //assigning variables from object something to values
 
-
   @override
   Widget build(BuildContext context) {
-    
-    //variables which repersent the 
+    //variables which repersent the
     int age = widget.age.toInt();
     int suppineHr = widget.suppineHeartRate.toInt();
 
@@ -193,14 +188,20 @@ class _StandingTestPageState extends State<StandingTestPage> {
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w900,
-                                  fontSize: 20
-                                )
-                              ),
+                                  fontSize: 20)),
                         ],
                       ),
                       onTap: () {
-                        Navigator.pushNamed(context, '/schedulePage');
-                      })),
+                        Navigator.push(
+                    context, 
+                    MaterialPageRoute(
+                      builder: (context) => SchedulePage(
+                        age: age,
+                        suppineHr: suppineHr,
+                        timedHr: tenMinuteHR,
+                      )
+                    )
+                  );})),
             ),
           ),
         ],

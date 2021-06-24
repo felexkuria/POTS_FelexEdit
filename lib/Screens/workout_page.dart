@@ -6,8 +6,10 @@ import 'stand_test.dart';
 
 class SchedulePage extends StatefulWidget {
   
-  SchedulePage({required this.something});
-  final TargetHrCalculate something;
+  SchedulePage({required this.age, required this.suppineHr, required this.timedHr});
+  final int age;
+  final int suppineHr;
+  final int timedHr;
 
   @override
   _SchedulePageState createState() => _SchedulePageState();
