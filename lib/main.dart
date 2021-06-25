@@ -9,23 +9,18 @@ void main() {
   runApp(MyApp());
 }
 
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        appBarTheme: AppBarTheme(
-          color: kBackground
-        ),
-
+        appBarTheme: AppBarTheme(color: kBackground),
         scaffoldBackgroundColor: kBackground,
       ),
 
       home: Input(),
 
       // initialRoute: '/input',
-
       // routes:{
       //   '/input': (context) => Input(),
       //   '/standTest': (context) => StandingTestPage(),
