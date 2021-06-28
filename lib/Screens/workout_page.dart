@@ -19,10 +19,16 @@ class SchedulePage extends StatefulWidget {
 class _SchedulePageState extends State<SchedulePage> {
 
   @override
+
+  DateTime now = new DateTime.now();
+  
   Widget build(BuildContext context) {
+
     final int age = widget.age;
     final int suppineHr = widget.suppineHr;
     final int timedHr = widget.timedHr;
+
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
