@@ -42,28 +42,37 @@ class _SchedulePageState extends State<SchedulePage> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           
-          Expanded(
-            child: ReusableCard(
-              boxStyle: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0), color: Colors.white),
-              cardChild:Center(child: Text('MONTHS 1-2', style: kCardTitleStyle,),),
+          GestureDetector(
+            child: Expanded(
+              child: ReusableCard(
+                boxStyle: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0), color: Colors.white),
+                cardChild:Center(child: Text('MONTHS 1-2', style: kCardTitleStyle,),),
+              ),
             ),
+            onTap: () {},
           ),
           
-          Expanded(
-            child: ReusableCard(
-              boxStyle: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0), color: Colors.white),
-              cardChild:Center(child: Text('MONTHS 3-5', style: kCardTitleStyle,),),
+          GestureDetector(
+            child: Expanded(
+              child: ReusableCard(
+                boxStyle: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0), color: Colors.white),
+                cardChild:Center(child: Text('MONTHS 3-5', style: kCardTitleStyle,),),
+              ),
             ),
+            onTap: () {}
           ),
           
-          Expanded(
-            child: ReusableCard(
-              boxStyle: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0), color: Colors.white),
-              cardChild:Center(child: Text('MONTHS 6-7', style: kCardTitleStyle,),),
+          GestureDetector(
+            child: Expanded(
+              child: ReusableCard(
+                boxStyle: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0), color: Colors.white),
+                cardChild:Center(child: Text('MONTHS 6-7', style: kCardTitleStyle,),),
+              ),
             ),
+            onTap: () {}
           ),
         ],
       ),
