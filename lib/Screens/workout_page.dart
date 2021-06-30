@@ -19,15 +19,13 @@ class SchedulePage extends StatefulWidget {
 class _SchedulePageState extends State<SchedulePage> {
 
   @override
-
-  DateTime now = new DateTime.now();
+  // DateTime now = new DateTime.now();
   
   Widget build(BuildContext context) {
 
     final int age = widget.age;
     final int suppineHr = widget.suppineHr;
     final int timedHr = widget.timedHr;
-
 
     return Scaffold(
       appBar: AppBar(
@@ -40,39 +38,46 @@ class _SchedulePageState extends State<SchedulePage> {
 
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          
-          GestureDetector(
-            child: Expanded(
-              child: ReusableCard(
-                boxStyle: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0), color: Colors.white),
-                cardChild:Center(child: Text('MONTHS 1-2', style: kCardTitleStyle,),),
+        children: <Widget>[        
+          Expanded(
+            child: GestureDetector(
+              child: Expanded(
+                child: ReusableCard(
+                  boxStyle: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0), color: Colors.white),
+                  cardChild:Center(child: Text('MONTHS 1-2', style: kCardTitleStyle,),),
+                ),
               ),
+              onTap: () {
+
+              },
             ),
-            onTap: () {},
           ),
           
-          GestureDetector(
-            child: Expanded(
-              child: ReusableCard(
-                boxStyle: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0), color: Colors.white),
-                cardChild:Center(child: Text('MONTHS 3-5', style: kCardTitleStyle,),),
+          Expanded(
+            child: GestureDetector(
+              child: Expanded(
+                child: ReusableCard(
+                  boxStyle: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0), color: Colors.white),
+                  cardChild:Center(child: Text('MONTHS 3-5', style: kCardTitleStyle,),),
+                ),
               ),
+              onTap: () {}
             ),
-            onTap: () {}
           ),
           
-          GestureDetector(
-            child: Expanded(
-              child: ReusableCard(
-                boxStyle: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0), color: Colors.white),
-                cardChild:Center(child: Text('MONTHS 6-7', style: kCardTitleStyle,),),
+          Expanded(
+            child: GestureDetector(
+              child: Expanded(
+                child: ReusableCard(
+                  boxStyle: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0), color: Colors.white),
+                  cardChild:Center(child: Text('MONTHS 6-7', style: kCardTitleStyle,),),
+                ),
               ),
+              onTap: () {}
             ),
-            onTap: () {}
           ),
         ],
       ),

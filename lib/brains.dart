@@ -21,11 +21,15 @@ class TargetHrCalculate{
   }
 
   double percentOfHRR(){
-    return heartRateReserve() * percentInHRR;
+    return heartRateReserve() * .75;
   }
 
   double midMaxaxSteadyState(){
     return percentOfHRR()+suppineHr;
+  }
+
+  double RacePace(){
+    return maxHr()* .95;
   }
 
 }
