@@ -29,13 +29,12 @@ class _SchedulePageState extends State<SchedulePage> {
 
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        title: Text(
-          'POTS APP',
-          style: kCardTitleStyle,
-        ),
-      ),
-
+          elevation: 0,
+          title: Text('POTS APP',
+              style: TextStyle(
+                  color: kTitleColor,
+                  fontWeight: FontWeight.w900,
+                  fontSize: 40))),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[        

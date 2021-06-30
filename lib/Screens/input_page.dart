@@ -35,7 +35,7 @@ class _InputState extends State<Input> {
         children: <Widget>[
           //intro card
           Expanded(
-              flex: 2,
+              flex: 3,
               child: ReusableCard(
                 boxStyle: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
@@ -53,7 +53,8 @@ class _InputState extends State<Input> {
 
           //age card
           Expanded(
-            flex: 3,
+            flex: 5,
+            //with the suppine hr button, the flex should be 3
             child: ReusableCard(
               boxStyle: generalStyle,
               cardChild: Column(
@@ -85,37 +86,37 @@ class _InputState extends State<Input> {
           ),
 
           //supine hr card
-          Expanded(
-            flex: 3,
-            child: ReusableCard(
-              boxStyle: generalStyle,
-              cardChild: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Text('SITTING OR LYING HR',
-                        textAlign: TextAlign.center, style: kCardTitleStyle),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(supine_HR.toInt().toString(), style: kValStyle),
-                        Text('bpm')
-                      ],
-                    ),
-                    Slider(
-                      value: supine_HR,
-                      min: 0,
-                      max: 200,
-                      divisions: 200,
-                      onChanged: (double value) {
-                        setState(() {
-                          supine_HR = value;
-                        });
-                      },
-                      activeColor: kTitleColor,
-                    ),
-                  ]),
-            ),
-          ),
+          // Expanded(
+          //   flex: 3,
+          //   child: ReusableCard(
+          //     boxStyle: generalStyle,
+          //     cardChild: Column(
+          //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //         children: <Widget>[
+          //           Text('SITTING OR LYING HR',
+          //               textAlign: TextAlign.center, style: kCardTitleStyle),
+          //           Row(
+          //             mainAxisAlignment: MainAxisAlignment.center,
+          //             children: [
+          //               Text(supine_HR.toInt().toString(), style: kValStyle),
+          //               Text('bpm')
+          //             ],
+          //           ),
+          //           Slider(
+          //             value: supine_HR,
+          //             min: 0,
+          //             max: 200,
+          //             divisions: 200,
+          //             onChanged: (double value) {
+          //               setState(() {
+          //                 supine_HR = value;
+          //               });
+          //             },
+          //             activeColor: kTitleColor,
+          //           ),
+          //         ]),
+          //   ),
+          // ),
 
           //stand test button
           Expanded(
