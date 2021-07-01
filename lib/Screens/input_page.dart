@@ -3,6 +3,7 @@ import 'package:pots_new/Screens/stand_test.dart';
 import '../../constants.dart';
 import 'package:flutter/material.dart';
 import '../Widgets/card.dart';
+import 'supine_test.dart';
 
 class Input extends StatefulWidget {
   // final double ageVal;
@@ -122,29 +123,33 @@ class _InputState extends State<Input> {
           Expanded(
             flex: 1,
             child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(color: kTitleColor),
-                child: GestureDetector(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("STAND TEST",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w900,
-                                fontSize: 20)),
-                      ],
+              width: double.infinity,
+              decoration: BoxDecoration(color: kTitleColor),
+              child: GestureDetector(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("SUPINE TEST",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w900,
+                            fontSize: 20)),
+                  ],
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SupineTest(
+                            age: age_val.toInt(),
+                          // suppineHeartRate: supine_HR,
+                          ),
                     ),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => StandingTestPage(
-                                    age: age_val,
-                                    suppineHeartRate: supine_HR,
-                                  )));
-                    })),
+                  );
+                },
+              ),
+            ),
           ),
         ],
       ),

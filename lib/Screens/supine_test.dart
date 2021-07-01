@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:pots_new/Screens/stand_test.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import '../../constants.dart';
 import '../Widgets/card.dart';
 import 'package:timer_count_down/timer_count_down.dart';
-import 'workout_page.dart';
 
-class StandingTestPage extends StatefulWidget {
-  StandingTestPage({required this.age, required this.suppineHeartRate});
-  final double age;
-  final double suppineHeartRate;
+
+class SupineTest extends StatefulWidget {
+  final int age;
+  SupineTest({required this.age});
 
   @override
-  _StandingTestPageState createState() => _StandingTestPageState();
+  _SupineTestState createState() => _SupineTestState();
 }
 
-class _StandingTestPageState extends State<StandingTestPage> {
+class _SupineTestState extends State<SupineTest> {
   final CountdownController _controller = new CountdownController();
   //HR after 10 minutes
-  int tenMinuteHR = 130;
+  int supineHeartRate = 130;
 
   //variables required for the minutes and seconds
   int minutes = 0;
@@ -29,14 +29,8 @@ class _StandingTestPageState extends State<StandingTestPage> {
   bool isVisible = false;
   bool generateWorkoutIsVisible = false;
 
-  //assigning variables from object something to values
-
   @override
   Widget build(BuildContext context) {
-    //variables which repersent the
-    int age = widget.age.toInt();
-    int suppineHr = widget.suppineHeartRate.toInt();
-
     return Scaffold(
       appBar: AppBar(
           elevation: 0,
@@ -56,7 +50,11 @@ class _StandingTestPageState extends State<StandingTestPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Text("STAND UP AND CLICK START WHEN READY", style: kCardTitleStyle),
+                  Text(
+                    "LAY DOWN AND CLICK START WHEN READY",
+                    textAlign: TextAlign.center,
+                    style: kCardTitleStyle
+                  ),
                   Countdown(
                     controller: _controller,
                     seconds: 5,
@@ -137,12 +135,12 @@ class _StandingTestPageState extends State<StandingTestPage> {
                 cardChild: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      Text('HR AFTER 10 MINTES OF STANDING',
+                      Text('HR AFTER 5 MINTES OF LYING DOWN',
                           textAlign: TextAlign.center, style: kCardTitleStyle),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(tenMinuteHR.toInt().toString(),
+                          Text(supineHeartRate.toInt().toString(),
                               style: kValStyle),
                           Text('b/m')
                         ],
@@ -150,13 +148,13 @@ class _StandingTestPageState extends State<StandingTestPage> {
                       AbsorbPointer(
                         absorbing: false,
                         child: Slider(
-                          value: tenMinuteHR.toDouble(),
+                          value: supineHeartRate.toDouble(),
                           min: 0,
                           max: 250,
                           divisions: 250,
                           onChanged: (double value) {
                             setState(() {
-                              tenMinuteHR = value.toInt();
+                              supineHeartRate = value.toInt();
                             });
                           },
                           activeColor: kTitleColor,
@@ -179,7 +177,7 @@ class _StandingTestPageState extends State<StandingTestPage> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("GENERATE WORKOUT",
+                          Text("STANDING TEST",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: Colors.white,
@@ -189,15 +187,16 @@ class _StandingTestPageState extends State<StandingTestPage> {
                       ),
                       onTap: () {
                         Navigator.push(
-                    context, 
-                    MaterialPageRoute(
-                      builder: (context) => SchedulePage(
-                        age: age,
-                        suppineHr: suppineHr,
-                        timedHr: tenMinuteHR,
-                      )
-                    )
-                  );})),
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => StandingTestPage(
+                              age: widget.age.toDouble(),
+                              // suppineHr: supineHeartRate
+                              suppineHeartRate: supineHeartRate.toDouble()
+                            ),
+                          ),
+                        );
+                      })),
             ),
           ),
         ],
@@ -206,7 +205,6 @@ class _StandingTestPageState extends State<StandingTestPage> {
   }
 }
 
-//Formats the time given by the timer package
 String minutesAndSeconds(double time) {
   String minutes;
   String seconds;
