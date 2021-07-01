@@ -4,6 +4,7 @@ import '../constants.dart';
 import '../brains.dart';
 import 'stand_test.dart';
 import '../Widgets/card.dart';
+import 'month1-2.dart';
 
 class SchedulePage extends StatefulWidget {
   
@@ -48,7 +49,13 @@ class _SchedulePageState extends State<SchedulePage> {
                 ),
               ),
               onTap: () {
-
+                Navigator.push
+                (
+                  context, 
+                  MaterialPageRoute(
+                    builder: (context) => MonthsOneAndTwo()
+                  )
+                );
               },
             ),
           ),
