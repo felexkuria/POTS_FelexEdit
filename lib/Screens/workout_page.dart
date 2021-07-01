@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
-import '../constants.dart';
 import '../brains.dart';
-import 'stand_test.dart';
+import '../constants.dart';
 import '../Widgets/card.dart';
 import 'month1-2.dart';
 
@@ -27,6 +25,8 @@ class _SchedulePageState extends State<SchedulePage> {
     final int age = widget.age;
     final int suppineHr = widget.suppineHr;
     final int timedHr = widget.timedHr;
+
+    TargetHrCalculate provider = new TargetHrCalculate(age: age, tenHr: timedHr, suppineHr: suppineHr);
 
     return Scaffold(
       appBar: AppBar(
@@ -53,7 +53,9 @@ class _SchedulePageState extends State<SchedulePage> {
                 (
                   context, 
                   MaterialPageRoute(
-                    builder: (context) => MonthsOneAndTwo()
+                    builder: (context) => MonthsOneAndTwo(
+                      passedBrainObject: provider
+                    )
                   )
                 );
               },
