@@ -26,7 +26,7 @@ class _InputState extends State<Input> {
       appBar: AppBar(
           // centerTitle: false,
           elevation: 0,
-          title: Text('POTS APP',
+          title: Text('Holla',
               style: TextStyle(
                   color: kTitleColor,
                   fontWeight: FontWeight.w900,
