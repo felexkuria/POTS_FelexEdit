@@ -56,7 +56,11 @@ class _StandingTestPageState extends State<StandingTestPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Text("STAND UP AND CLICK START WHEN READY", style: kCardTitleStyle),
+                  Text(
+                    "STAND UP AND CLICK START WHEN READY",
+                    textAlign: TextAlign.center,
+                    style: kCardTitleStyle,
+                  ),
                   Countdown(
                     controller: _controller,
                     seconds: 5,
@@ -189,15 +193,14 @@ class _StandingTestPageState extends State<StandingTestPage> {
                       ),
                       onTap: () {
                         Navigator.push(
-                    context, 
-                    MaterialPageRoute(
-                      builder: (context) => SchedulePage(
-                        age: age,
-                        suppineHr: suppineHr,
-                        timedHr: tenMinuteHR,
-                      )
-                    )
-                  );})),
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SchedulePage(
+                                      age: age,
+                                      suppineHr: suppineHr,
+                                      timedHr: tenMinuteHR,
+                                    )));
+                      })),
             ),
           ),
         ],
