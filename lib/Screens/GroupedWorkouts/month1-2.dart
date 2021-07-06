@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-import '../constants.dart';
-import '../brains.dart';
-import '../Widgets/card.dart';
+import '../../constants.dart';
+import '../../brains.dart';
+import '../../Widgets/card.dart';
 
 class MonthsOneAndTwo extends StatefulWidget {
   final TargetHrCalculate passedBrainObject;
@@ -78,6 +78,7 @@ class _MonthsOneAndTwoState extends State<MonthsOneAndTwo> {
             ],
           ),
           SlidingUpPanel(
+            header: Text("Holla"),
             renderPanelSheet: false,
             panel: _floatingPanel(),
             collapsed: _floatingCollapsed(),
@@ -115,7 +116,7 @@ Widget _floatingPanel(){
       borderRadius: BorderRadius.all(Radius.circular(24.0)),
       boxShadow: [
         BoxShadow(
-          blurRadius: 20.0,
+          blurRadius: 10.0,
           color: Colors.grey,
         ),
       ]

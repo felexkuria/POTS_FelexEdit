@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-import '../constants.dart';
+import '../../constants.dart';
 
 class MonthsThreeToFive extends StatefulWidget {
   const MonthsThreeToFive({ Key? key }) : super(key: key);
@@ -21,7 +21,6 @@ class _MonthsThreeToFiveState extends State<MonthsThreeToFive> {
       body: Scaffold(
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: kBackground,
           title: Text(
             "Months 3-5",
             style: TextStyle(

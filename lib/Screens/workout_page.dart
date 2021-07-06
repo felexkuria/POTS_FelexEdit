@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import '../brains.dart';
 import '../constants.dart';
 import '../Widgets/card.dart';
-import 'month1-2.dart';
-import 'month3-5.dart';
+import 'GroupedWorkouts/month1-2.dart';
+import 'GroupedWorkouts/month3-5.dart';
+import 'GroupedWorkouts/month6-7.dart';
 
 class SchedulePage extends StatefulWidget {
   
@@ -91,7 +92,14 @@ class _SchedulePageState extends State<SchedulePage> {
                   cardChild:Center(child: Text('MONTHS 6-7', style: kCardTitleStyle,),),
                 ),
               ),
-              onTap: () {}
+              onTap: () {
+                // Navigator.push(
+                //   context, 
+                //   MaterialPageRoute(
+                //     builder: (context) => SlidingUpPanelExample()
+                //   )
+                // );
+              }
             ),
           ),
         ],
