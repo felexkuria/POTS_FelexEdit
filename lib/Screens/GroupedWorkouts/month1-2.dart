@@ -78,7 +78,6 @@ class _MonthsOneAndTwoState extends State<MonthsOneAndTwo> {
             ],
           ),
           SlidingUpPanel(
-            header: Text("Holla"),
             renderPanelSheet: false,
             panel: _floatingPanel(),
             collapsed: _floatingCollapsed(),
