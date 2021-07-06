@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   timer_count_down: ^2.1.0+1
+  sliding_up_panel: ^2.0.0+1
 
 
   # The following adds the Cupertino Icons font to your application.

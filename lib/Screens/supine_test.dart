@@ -34,11 +34,11 @@ class _SupineTestState extends State<SupineTest> {
     return Scaffold(
       appBar: AppBar(
           elevation: 0,
-          title: Text('POTS APP',
+          title: Text('SUPINE TEST',
               style: TextStyle(
                   color: kTitleColor,
                   fontWeight: FontWeight.w900,
-                  fontSize: 40))),
+                  fontSize: 30))),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[

@@ -3,6 +3,7 @@ import '../brains.dart';
 import '../constants.dart';
 import '../Widgets/card.dart';
 import 'month1-2.dart';
+import 'month3-5.dart';
 
 class SchedulePage extends StatefulWidget {
   
@@ -49,8 +50,7 @@ class _SchedulePageState extends State<SchedulePage> {
                 ),
               ),
               onTap: () {
-                Navigator.push
-                (
+                Navigator.push(
                   context, 
                   MaterialPageRoute(
                     builder: (context) => MonthsOneAndTwo(
@@ -71,7 +71,14 @@ class _SchedulePageState extends State<SchedulePage> {
                   cardChild:Center(child: Text('MONTHS 3-5', style: kCardTitleStyle,),),
                 ),
               ),
-              onTap: () {}
+              onTap: () {
+                Navigator.push(
+                  context, 
+                  MaterialPageRoute(
+                    builder: (context) => MonthsThreeToFive()
+                  )
+                );
+              }
             ),
           ),
           

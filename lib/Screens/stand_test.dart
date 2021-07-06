@@ -44,7 +44,7 @@ class _StandingTestPageState extends State<StandingTestPage> {
               style: TextStyle(
                   color: kTitleColor,
                   fontWeight: FontWeight.w900,
-                  fontSize: 40))),
+                  fontSize: 30))),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
