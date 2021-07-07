@@ -37,7 +37,7 @@ class _SchedulePageState extends State<SchedulePage> {
               style: TextStyle(
                   color: kTitleColor,
                   fontWeight: FontWeight.w900,
-                  fontSize: 40))),
+                  fontSize: 30))),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[        
@@ -93,12 +93,12 @@ class _SchedulePageState extends State<SchedulePage> {
                 ),
               ),
               onTap: () {
-                // Navigator.push(
-                //   context, 
-                //   MaterialPageRoute(
-                //     builder: (context) => SlidingUpPanelExample()
-                //   )
-                // );
+                Navigator.push(
+                  context, 
+                  MaterialPageRoute(
+                    builder: (context) => MonthsSixToSeven()
+                  )
+                );
               }
             ),
           ),

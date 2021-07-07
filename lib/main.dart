@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'constants.dart';
-import 'Screens/input_page.dart';
-import 'Screens/stand_test.dart';
+import 'Screens/UserTests/input_page.dart';
+import 'Screens/UserTests/stand_test.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 import 'Screens/workout_page.dart';
 
@@ -19,13 +19,6 @@ class MyApp extends StatelessWidget {
       ),
 
       home: Input(),
-
-      // initialRoute: '/input',
-      // routes:{
-      //   '/input': (context) => Input(),
-      //   '/standTest': (context) => StandingTestPage(),
-      //   '/schedulePage': (context) => SchedulePage()
-      // }
     );
   }
 }

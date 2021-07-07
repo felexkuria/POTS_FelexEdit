@@ -5,6 +5,8 @@ const Color kTitleColor = Color(0xFFD84654);
 
 const int ageSubtractionConstants = 220;
 
+const double borderRadiusCard = 15.0;
+
 const double percentInHRR = .75;
 
 const TextStyle kCardTitleStyle =  TextStyle(
@@ -18,6 +20,6 @@ const TextStyle kValStyle = TextStyle(
                     );
 
 final BoxDecoration generalStyle = BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(15),
           color: Color(0xFFFFFFFF),
         );

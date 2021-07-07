@@ -38,7 +38,7 @@ class _MonthsOneAndTwoState extends State<MonthsOneAndTwo> {
               Expanded(
                 child: ReusableCard(
                   boxStyle: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
+                    borderRadius: BorderRadius.circular(borderRadiusCard),
                     color: Colors.white,
                   ),
                   cardChild: Center(
@@ -79,6 +79,7 @@ class _MonthsOneAndTwoState extends State<MonthsOneAndTwo> {
           ),
           SlidingUpPanel(
             renderPanelSheet: false,
+            maxHeight: 750, //make sure to 
             panel: _floatingPanel(),
             collapsed: _floatingCollapsed(),
           ),
@@ -88,13 +89,14 @@ class _MonthsOneAndTwoState extends State<MonthsOneAndTwo> {
   }
 }
 
+//functions which modify the floating and collapsed slide up widget
 Widget _floatingCollapsed(){
   return Container(
     decoration: BoxDecoration(
       color: kTitleColor,
-      borderRadius: BorderRadius.only(topLeft: Radius.circular(24.0), topRight: Radius.circular(24.0)),
+      // borderRadius: BorderRadius.only(topLeft: Radius.circular(borderRadiusCard), topRight: Radius.circular(borderRadiusCard)),
     ),
-    margin: const EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 0.0),
+    // margin: const EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 0.0),
     child: Center(
       child: Text(
         "Progress Tab",
@@ -112,7 +114,7 @@ Widget _floatingPanel(){
   return Container(
     decoration: BoxDecoration(
       color: kTitleColor,
-      borderRadius: BorderRadius.all(Radius.circular(24.0)),
+      borderRadius: BorderRadius.all(Radius.circular(40)),
       boxShadow: [
         BoxShadow(
           blurRadius: 10.0,

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:pots_new/Screens/stand_test.dart';
-import '../../constants.dart';
+import 'package:pots_new/Screens/UserTests/stand_test.dart';
+import '../../../constants.dart';
 import 'package:flutter/material.dart';
-import '../Widgets/card.dart';
+import '../../Widgets/card.dart';
 import 'supine_test.dart';
 
 class Input extends StatefulWidget {
@@ -39,7 +39,7 @@ class _InputState extends State<Input> {
               flex: 3,
               child: ReusableCard(
                 boxStyle: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
+                    borderRadius: BorderRadius.circular(borderRadiusCard),
                     color: kTitleColor),
                 cardChild: Center(
                   child: Text("SOME INFO GOES HERE",

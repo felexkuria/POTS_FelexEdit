@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'Screens/input_page.dart';
-import 'Screens/stand_test.dart';
+import 'Screens/UserTests/input_page.dart';
+import 'Screens/UserTests/stand_test.dart';
 import 'constants.dart';
 
 class TargetHrCalculate{
