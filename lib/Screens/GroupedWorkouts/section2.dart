@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../../constants.dart';
 import '../../Widgets/card.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-class MonthsSixToSeven extends StatefulWidget {
-  const MonthsSixToSeven({ Key? key }) : super(key: key);
+class Section2 extends StatefulWidget {
+  const Section2({Key? key}) : super(key: key);
 
   @override
-  _MonthsSixToSevenState createState() => _MonthsSixToSevenState();
+  _Section2State createState() => _Section2State();
 }
 
-class _MonthsSixToSevenState extends State<MonthsSixToSeven> {
-  @override
+class _Section2State extends State<Section2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         title: Text(
-          'MONTHS 6-7',
+          'MONTHS 2-4',
           style: TextStyle(
             color: kTitleColor,
             fontWeight: FontWeight.w900,
@@ -83,7 +82,6 @@ class _MonthsSixToSevenState extends State<MonthsSixToSeven> {
     );
   }
 }
-
 
 //functions which modify the floating and collapsed slide up widget
 Widget _floatingCollapsed(){

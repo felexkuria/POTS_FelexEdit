@@ -42,13 +42,19 @@ class _InputState extends State<Input> {
                     borderRadius: BorderRadius.circular(borderRadiusCard),
                     color: kTitleColor),
                 cardChild: Center(
-                  child: Text("SOME INFO GOES HERE",
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Text(
+                      "Thank you for downloading the POTS app. Please follow the instructions to generate a personalized workout plan!",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          wordSpacing: 1,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w900,
-                          fontSize: 20)),
+                        wordSpacing: 1,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
                 ),
               )),
 
@@ -142,9 +148,9 @@ class _InputState extends State<Input> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => SupineTest(
-                            age: age_val.toInt(),
-                          // suppineHeartRate: supine_HR,
-                          ),
+                        age: age_val.toInt(),
+                        // suppineHeartRate: supine_HR,
+                      ),
                     ),
                   );
                 },

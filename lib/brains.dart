@@ -31,7 +31,6 @@ class TargetHrCalculate{
   double RacePace(){
     return maxHr()* .95;
   }
-
 }
 
 
