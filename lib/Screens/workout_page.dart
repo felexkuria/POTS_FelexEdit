@@ -5,14 +5,15 @@ import '../Widgets/card.dart';
 import 'GroupedWorkouts/phaseOne.dart';
 import 'GroupedWorkouts/phaseTwo.dart';
 import 'GroupedWorkouts/phaseThree.dart';
+import '/Widgets/monthCard.dart';
 
 //Phase 1: Month 1
 //Phase 2: Month 2,3
 //Pahse 3: Month 4,5,6
 
 class SchedulePage extends StatefulWidget {
-  
-  SchedulePage({required this.age, required this.suppineHr, required this.timedHr});
+  SchedulePage(
+      {required this.age, required this.suppineHr, required this.timedHr});
   final int age;
   final int suppineHr;
   final int timedHr;
@@ -22,17 +23,16 @@ class SchedulePage extends StatefulWidget {
 }
 
 class _SchedulePageState extends State<SchedulePage> {
-
   @override
   // DateTime now = new DateTime.now();
-  
-  Widget build(BuildContext context) {
 
+  Widget build(BuildContext context) {
     final int age = widget.age;
     final int suppineHr = widget.suppineHr;
     final int timedHr = widget.timedHr;
 
-    TargetHrCalculate provider = new TargetHrCalculate(age: age, tenHr: timedHr, suppineHr: suppineHr);
+    TargetHrCalculate provider =
+        new TargetHrCalculate(age: age, tenHr: timedHr, suppineHr: suppineHr);
 
     return Scaffold(
       appBar: AppBar(
@@ -42,75 +42,30 @@ class _SchedulePageState extends State<SchedulePage> {
                   color: kTitleColor,
                   fontWeight: FontWeight.w900,
                   fontSize: 30))),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[        
-          Expanded(
-            child: GestureDetector(
-              child: Expanded(
-                child: ReusableCard(
-                  boxStyle: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0), color: Colors.white),
-                  cardChild:Center(child: Text('Month 1', style: kCardTitleStyle,),),
-                ),
-              ),
-              onTap: () {
-                Navigator.push(
-                  context, 
-                  MaterialPageRoute(
-                    builder: (context) => PhaseOne(
-                      passedBrainObject: provider
-                    )
-                  )
-                );
-              },
+      body: ListView(
+        children: [
+          
+          //MonthCard is in Widgets folder
+          MonthCard(
+            monthName: "Month 1",
+            namedRoute: PhaseOne(
+              passedBrainObject: provider,
             ),
           ),
-          
-          Expanded(
-            child: GestureDetector(
-              child: Expanded(
-                child: ReusableCard(
-                  boxStyle: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0), color: Colors.white),
-                  cardChild:Center(child: Text('Month 2,3', style: kCardTitleStyle,),),
-                ),
-              ),
-              onTap: () {
-                Navigator.push(
-                  context, 
-                  MaterialPageRoute(
-                    builder: (context) => PhaseTwo(
-                      passedBrainObject: provider
-                    )
-                  )
-                );
-              }
+
+          MonthCard(
+            monthName: "Month 2,3",
+            namedRoute: PhaseTwo(
+              passedBrainObject: provider,
             ),
           ),
-          
-          Expanded(
-            child: GestureDetector(
-              child: Expanded(
-                child: ReusableCard(
-                  boxStyle: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0), color: Colors.white),
-                  cardChild:Center(child: Text('Month 4,5,6', style: kCardTitleStyle,),),
-                ),
-              ),
-              onTap: () {
-                Navigator.push(
-                  context, 
-                  MaterialPageRoute(
-                    builder: (context) => PhaseThree()
-                  )
-                );
-              }
-            ),
+
+          MonthCard(
+            monthName: "Month 4,5,6",
+            namedRoute: PhaseThree(),
           ),
         ],
       ),
-      
 
       //bottomNavigationBar: BottomNavigationBar(
       //   fixedColor: Colors.black,

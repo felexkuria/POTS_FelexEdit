@@ -95,7 +95,8 @@ class opened extends StatefulWidget {
 }
 
 class _openedState extends State<opened> {
-  bool _isSelected = false;
+  //list is not working for some reason
+  // List<bool> _phaseOne = [false, false, false, false];
   bool _weak1Phase1Val = false;
   bool _weak2Phase1Val = false;
   bool _weak3Phase1Val = false;
