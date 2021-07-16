@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import '../brains.dart';
 import '../constants.dart';
 import '../Widgets/card.dart';
-import 'GroupedWorkouts/section1.dart';
-import 'GroupedWorkouts/section2.dart';
-import 'GroupedWorkouts/section3.dart';
+import 'GroupedWorkouts/phaseOne.dart';
+import 'GroupedWorkouts/phaseTwo.dart';
+import 'GroupedWorkouts/phaseThree.dart';
 
 //Phase 1: Month 1
 //Phase 2: Month 2,3
@@ -51,14 +51,14 @@ class _SchedulePageState extends State<SchedulePage> {
                 child: ReusableCard(
                   boxStyle: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.0), color: Colors.white),
-                  cardChild:Center(child: Text('MONTH 1', style: kCardTitleStyle,),),
+                  cardChild:Center(child: Text('Month 1', style: kCardTitleStyle,),),
                 ),
               ),
               onTap: () {
                 Navigator.push(
                   context, 
                   MaterialPageRoute(
-                    builder: (context) => SectionOne(
+                    builder: (context) => PhaseOne(
                       passedBrainObject: provider
                     )
                   )
@@ -73,14 +73,16 @@ class _SchedulePageState extends State<SchedulePage> {
                 child: ReusableCard(
                   boxStyle: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.0), color: Colors.white),
-                  cardChild:Center(child: Text('MONTHS 2,3', style: kCardTitleStyle,),),
+                  cardChild:Center(child: Text('Month 2,3', style: kCardTitleStyle,),),
                 ),
               ),
               onTap: () {
                 Navigator.push(
                   context, 
                   MaterialPageRoute(
-                    builder: (context) => Section2()
+                    builder: (context) => PhaseTwo(
+                      passedBrainObject: provider
+                    )
                   )
                 );
               }
@@ -93,14 +95,14 @@ class _SchedulePageState extends State<SchedulePage> {
                 child: ReusableCard(
                   boxStyle: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.0), color: Colors.white),
-                  cardChild:Center(child: Text('MONTHS 4,5,6', style: kCardTitleStyle,),),
+                  cardChild:Center(child: Text('Month 4,5,6', style: kCardTitleStyle,),),
                 ),
               ),
               onTap: () {
                 Navigator.push(
                   context, 
                   MaterialPageRoute(
-                    builder: (context) => Section3()
+                    builder: (context) => PhaseThree()
                   )
                 );
               }
@@ -108,74 +110,36 @@ class _SchedulePageState extends State<SchedulePage> {
           ),
         ],
       ),
+      
 
-      // bottomNavigationBar: BottomAppBar(
-      //   color: kTitleColor,
-      //   child: Row(
-      //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      //     crossAxisAlignment: CrossAxisAlignment.center,
-      //     children: <Widget>[
-      //       Icon(
-      //         Icons.auto_graph,
-      //         size: 40
-      //       ),
-
-      //       Icon(
-      //         Icons.subject,
-      //         size: 40
-      //       ),
-      //     ]
-      //   ),
-      // ),
-      // bottomNavigationBar: BottomNavigationBar(
+      //bottomNavigationBar: BottomNavigationBar(
+      //   fixedColor: Colors.black,
       //   items: const <BottomNavigationBarItem>[
       //     BottomNavigationBarItem(
       //       icon: Icon(Icons.home),
       //       label: 'Progress',
-      //       backgroundColor: Colors.blue
+      //       backgroundColor: kTitleColor,
       //     ),
       //     BottomNavigationBarItem(
       //       icon: Icon(Icons.business),
       //       label: 'Workout Program',
-
+      //       backgroundColor: kTitleColor,
       //     ),
       //     BottomNavigationBarItem(
       //       icon: Icon(Icons.school),
       //       label: 'Report',
-      //       backgroundColor: kTitleColor
+      //       backgroundColor: kTitleColor,
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.settings),
+      //       label: 'General Information',
+      //       backgroundColor: kTitleColor,
       //     ),
       //   ],
       //   // currentIndex: _selectedIndex,
-      //   selectedItemColor: kTitleColor
+      //   // selectedItemColor: Colors.amber[800],
+      //   // onTap: (){},
       // ),
-      bottomNavigationBar: BottomNavigationBar(
-        fixedColor: Colors.black,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Progress',
-            backgroundColor: kTitleColor,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Workout Program',
-            backgroundColor: kTitleColor,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'Report',
-            backgroundColor: kTitleColor,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'General Information',
-            backgroundColor: kTitleColor,
-          ),
-        ],
-        // currentIndex: _selectedIndex,
-        // selectedItemColor: Colors.amber[800],
-        // onTap: (){},
-      ),
     );
   }
 }

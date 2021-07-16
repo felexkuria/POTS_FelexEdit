@@ -67,7 +67,7 @@ class _InputState extends State<Input> {
               cardChild: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    Text('AGE',
+                    Text('Age',
                         textAlign: TextAlign.center, style: kCardTitleStyle),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

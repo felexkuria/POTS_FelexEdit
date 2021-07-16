@@ -57,7 +57,7 @@ class _StandingTestPageState extends State<StandingTestPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    "STAND UP AND CLICK START WHEN READY",
+                    "Stand Up And Click Start When Ready",
                     textAlign: TextAlign.center,
                     style: kCardTitleStyle,
                   ),
@@ -141,7 +141,7 @@ class _StandingTestPageState extends State<StandingTestPage> {
                 cardChild: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      Text('HR AFTER 10 MINTES OF STANDING',
+                      Text('HR After 10 Minutes Of Standing',
                           textAlign: TextAlign.center, style: kCardTitleStyle),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -183,7 +183,7 @@ class _StandingTestPageState extends State<StandingTestPage> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("GENERATE WORKOUT",
+                          Text("Generate Workout",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: Colors.white,

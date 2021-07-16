@@ -34,7 +34,7 @@ class _SupineTestState extends State<SupineTest> {
     return Scaffold(
       appBar: AppBar(
           elevation: 0,
-          title: Text('SUPINE TEST',
+          title: Text('Supine Test',
               style: TextStyle(
                   color: kTitleColor,
                   fontWeight: FontWeight.w900,
@@ -51,7 +51,7 @@ class _SupineTestState extends State<SupineTest> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    "LAY DOWN AND CLICK START WHEN READY",
+                    "Lay Down And Click Start When Ready",
                     textAlign: TextAlign.center,
                     style: kCardTitleStyle
                   ),
@@ -135,7 +135,7 @@ class _SupineTestState extends State<SupineTest> {
                 cardChild: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      Text('HR AFTER 5 MINTES OF LYING DOWN',
+                      Text('HR After 5 Minutes of Lying Down',
                           textAlign: TextAlign.center, style: kCardTitleStyle),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -177,7 +177,7 @@ class _SupineTestState extends State<SupineTest> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("STANDING TEST",
+                          Text("Standing Test",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: Colors.white,
