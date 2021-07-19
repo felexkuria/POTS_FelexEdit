@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter/material.dart';
-import '../../constants.dart';
-import '../../Widgets/card.dart';
+import '../../../constants.dart';
+import '../../../Widgets/card.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import '../../../brains.dart';
 
-class PhaseThree extends StatefulWidget {
-  const PhaseThree({Key? key}) : super(key: key);
+class MonthThree extends StatefulWidget {
+  final TargetHrCalculate passedBrainObject;
+  MonthThree({required this.passedBrainObject});
 
   @override
-  _PhaseThreeState createState() => _PhaseThreeState();
+  _MonthThreeState createState() => _MonthThreeState();
 }
 
-class _PhaseThreeState extends State<PhaseThree> {
+class _MonthThreeState extends State<MonthThree> {
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -28,7 +30,7 @@ class _PhaseThreeState extends State<PhaseThree> {
         appBar: AppBar(
           elevation: 0,
           title: Text(
-            'Month 4-6',
+            'Month 3',
             style: TextStyle(
               color: kTitleColor,
               fontWeight: FontWeight.w900,

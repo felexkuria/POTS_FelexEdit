@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-import '../../constants.dart';
-import '../../brains.dart';
-import '../../Widgets/card.dart';
+import '../../../constants.dart';
+import '../../../brains.dart';
+import '../../../Widgets/card.dart';
 
-class PhaseOne extends StatefulWidget {
+class MonthTwo extends StatefulWidget {
   final TargetHrCalculate passedBrainObject;
 
-  PhaseOne({required this.passedBrainObject});
+  MonthTwo({required this.passedBrainObject});
 
   @override
-  _PhaseOneState createState() => _PhaseOneState();
+  _MonthTwoState createState() => _MonthTwoState();
 }
 
-class _PhaseOneState extends State<PhaseOne> {
+class _MonthTwoState extends State<MonthTwo> {
   // ignore: deprecated_member_use
   var isCheckedList = [false, false, false, false, false, false, false, false];
 
@@ -24,14 +24,14 @@ class _PhaseOneState extends State<PhaseOne> {
       child: SlidingUpPanel(
         backdropEnabled: true,
         renderPanelSheet: false,
-        maxHeight: 750, //make sure to
+        maxHeight: 700, //make sure to
         panel: opened(),
         collapsed: _floatingCollapsed(),
         body: Scaffold(
           appBar: AppBar(
             elevation: 0,
             title: Text(
-              'Month 1',
+              'Month 2',
               style: TextStyle(
                 color: kTitleColor,
                 fontWeight: FontWeight.w900,
@@ -73,12 +73,12 @@ class _PhaseOneState extends State<PhaseOne> {
                   ),
                 ],
               ),
-              SlidingUpPanel(
-                renderPanelSheet: false,
-                maxHeight: 750, //make sure to
-                panel: opened(),
-                collapsed: _floatingCollapsed(),
-              ),
+              // SlidingUpPanel(
+              //   renderPanelSheet: false,
+              //   maxHeight: 750, //make sure to
+              //   panel: HomePage(),
+              //   collapsed: _floatingCollapsed(),
+              // ),
             ],
           ),
         ),
@@ -95,8 +95,7 @@ class opened extends StatefulWidget {
 }
 
 class _openedState extends State<opened> {
-  //list is not working for some reason
-  // List<bool> _phaseOne = [false, false, false, false];
+  bool _isSelected = false;
   bool _weak1Phase1Val = false;
   bool _weak2Phase1Val = false;
   bool _weak3Phase1Val = false;
@@ -134,7 +133,7 @@ class _openedState extends State<opened> {
                   Container(
                     margin: const EdgeInsets.only(top: 10),
                     child: Text(
-                      "Progress Month 1",
+                      "Progress Month",
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w700,
@@ -145,10 +144,23 @@ class _openedState extends State<opened> {
               ),
             ),
           ),
+          
+          Padding(
+            padding: const EdgeInsets.only(top: 50,),
+            child: Text(
+              "Month 2",
+              style: TextStyle(
+                fontSize: 20, 
+                fontWeight: FontWeight.w700,
+                color: Colors.white
+              )
+            ),
+          ),
+
           CheckboxListTile(
             checkColor: kTitleColor,
             activeColor: Colors.white,
-            contentPadding: EdgeInsets.only(top: 50, right: 75, left: 75),
+            contentPadding: EdgeInsets.only(top: 20, right: 75, left: 75),
             value: this._weak1Phase1Val,
             title: Text("Week 1",
                 style: TextStyle(color: Colors.white, fontSize: 20)),
@@ -158,6 +170,7 @@ class _openedState extends State<opened> {
               });
             },
           ),
+
           CheckboxListTile(
             checkColor: kTitleColor,
             activeColor: Colors.white,
@@ -171,6 +184,7 @@ class _openedState extends State<opened> {
               });
             },
           ),
+
           CheckboxListTile(
             checkColor: kTitleColor,
             activeColor: Colors.white,
@@ -184,6 +198,7 @@ class _openedState extends State<opened> {
               });
             },
           ),
+          
           CheckboxListTile(
             checkColor: kTitleColor,
             activeColor: Colors.white,
@@ -254,3 +269,53 @@ month2: patients will be exercising
 phase 1: base pace workouts 
 phase 2: chose between # of base pace workouts, 
 */
+
+
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+
+
+class _HomePageState extends State<HomePage> {
+  int _index = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 8.0),
+          child: SizedBox(
+            height: double.infinity, // card height
+            child: PageView.builder(
+              itemCount: 2,
+              controller: PageController(viewportFraction: 0.7),
+              onPageChanged: (int index) => setState(() => _index = index),
+              itemBuilder: (_, i) {
+                return Transform.scale(
+                  scale: i == _index ? 1 : 0.9,
+                  child: Card(
+                    elevation: 6,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                    color: kTitleColor,
+                    child: Center(
+                      child: Text(
+                        "Card ${i + 1}",
+                        style: TextStyle(fontSize: 32),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

@@ -18,14 +18,20 @@ class _MonthCardState extends State<MonthCard> {
     return Expanded(
       child: GestureDetector(
           child: Expanded(
-            child: ReusableCard(
-              boxStyle: BoxDecoration(
+            child: Container(
+              margin: const EdgeInsets.only(right: 15, left: 15, top: 10),
+              height:100,
+              decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
-                  color: Colors.white),
-              cardChild: Center(
+                  color: Colors.white,),
+              child: Center(
                 child: Text(
                   widget.monthName,
-                  style: kCardTitleStyle,
+                  style: TextStyle(
+                    color: kTitleColor,
+                    fontSize: 30,
+                    fontWeight: FontWeight.w700
+                  )
                 ),
               ),
             ),

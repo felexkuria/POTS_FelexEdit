@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-import '../../constants.dart';
-import '../../brains.dart';
-import '../../Widgets/card.dart';
+import '../../../constants.dart';
+import '../../../brains.dart';
+import '../../../Widgets/card.dart';
 
-class PhaseTwo extends StatefulWidget {
+class MonthOne extends StatefulWidget {
   final TargetHrCalculate passedBrainObject;
 
-  PhaseTwo({required this.passedBrainObject});
+  MonthOne({required this.passedBrainObject});
 
   @override
-  _PhaseTwoState createState() => _PhaseTwoState();
+  _MonthOneState createState() => _MonthOneState();
 }
 
-class _PhaseTwoState extends State<PhaseTwo> {
+class _MonthOneState extends State<MonthOne> {
   // ignore: deprecated_member_use
   var isCheckedList = [false, false, false, false, false, false, false, false];
 
   @override
   Widget build(BuildContext context) {
+
     TargetHrCalculate usedInScreen = widget.passedBrainObject;
+
     return Material(
       child: SlidingUpPanel(
         backdropEnabled: true,
@@ -31,7 +33,7 @@ class _PhaseTwoState extends State<PhaseTwo> {
           appBar: AppBar(
             elevation: 0,
             title: Text(
-              'Month 2,3',
+              'Month 1',
               style: TextStyle(
                 color: kTitleColor,
                 fontWeight: FontWeight.w900,
@@ -42,38 +44,52 @@ class _PhaseTwoState extends State<PhaseTwo> {
           body: Stack(
             children: <Widget>[
               Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   Expanded(
+                    flex: 1,
+                    child: ReusableCard(
+                      cardChild: Column(
+                        children: [
+                          Text("Reccomended Exercises"),
+                          Text("Rowing, Swimming, Inclined Biking")
+                        ],
+                      ),
+                      boxStyle: BoxDecoration(
+                        borderRadius: BorderRadius.circular(borderRadiusCard),
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 3,
                     child: ReusableCard(
                       boxStyle: BoxDecoration(
                         borderRadius: BorderRadius.circular(borderRadiusCard),
                         color: Colors.white,
                       ),
                       cardChild: Center(
-                        child: Text(
-                          "Workout Info",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            wordSpacing: 1,
-                            color: kTitleColor,
-                            fontWeight: FontWeight.w900,
-                            fontSize: 30,
+                          child: Column(
+                        children: [
+                          Text("Exercise Information"),
+                        ],
+                      )
+                          // child: CheckboxListTile(
+                          //   title: const Text('Animate Slowly'),
+                          //   value: true,
+                          //   onChanged: (bool? value) {
+                          //     setState(() {});
+                          //   },
+                          //   secondary: const Icon(Icons.hourglass_empty),
+                          // ),
                           ),
-                        ),
-                        // child: CheckboxListTile(
-                        //   title: const Text('Animate Slowly'),
-                        //   value: true,
-                        //   onChanged: (bool? value) {
-                        //     setState(() {});
-                        //   },
-                        //   secondary: const Icon(Icons.hourglass_empty),
-                        // ),
-                      ),
                     ),
                   ),
+                  
                 ],
               ),
               SlidingUpPanel(
+                // slideDirection: SlideDirection.DOWN,
                 renderPanelSheet: false,
                 maxHeight: 750, //make sure to
                 panel: opened(),
@@ -95,11 +111,8 @@ class opened extends StatefulWidget {
 }
 
 class _openedState extends State<opened> {
-  bool _isSelected = false;
-  bool _weak1Phase1Val = false;
-  bool _weak2Phase1Val = false;
-  bool _weak3Phase1Val = false;
-  bool _weak4Phase1Val = false;
+  List<bool> phaseOne = [false, false, false, false];
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -133,7 +146,7 @@ class _openedState extends State<opened> {
                   Container(
                     margin: const EdgeInsets.only(top: 10),
                     child: Text(
-                      "Progress Month 2,3",
+                      "Progress Month 1",
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w700,
@@ -144,71 +157,55 @@ class _openedState extends State<opened> {
               ),
             ),
           ),
-          
-          Padding(
-            padding: const EdgeInsets.only(top: 50,),
-            child: Text(
-              "Month 2",
-              style: TextStyle(
-                fontSize: 20, 
-                fontWeight: FontWeight.w700,
-                color: Colors.white
-              )
-            ),
-          ),
-
           CheckboxListTile(
             checkColor: kTitleColor,
             activeColor: Colors.white,
-            contentPadding: EdgeInsets.only(top: 20, right: 75, left: 75),
-            value: this._weak1Phase1Val,
+            contentPadding: EdgeInsets.only(top: 50, right: 75, left: 75),
+            value: phaseOne[0],
             title: Text("Week 1",
                 style: TextStyle(color: Colors.white, fontSize: 20)),
-            onChanged: (_weak1Phase1Val) {
+            onChanged: (something) {
               setState(() {
-                this._weak1Phase1Val = _weak1Phase1Val!;
+                this.phaseOne[0] = something!;
               });
             },
           ),
-
           CheckboxListTile(
             checkColor: kTitleColor,
             activeColor: Colors.white,
             contentPadding: EdgeInsets.only(top: 20, right: 75, left: 75),
-            value: this._weak2Phase1Val,
+            value: this.phaseOne[1],
             title: Text("Week 2",
                 style: TextStyle(color: Colors.white, fontSize: 20)),
-            onChanged: (_weak2Phase1Val) {
+            onChanged: (something) {
               setState(() {
-                this._weak2Phase1Val = _weak2Phase1Val!;
+                this.phaseOne[1] = something!;
               });
             },
           ),
-
           CheckboxListTile(
             checkColor: kTitleColor,
             activeColor: Colors.white,
             contentPadding: EdgeInsets.only(top: 20, right: 75, left: 75),
-            value: this._weak3Phase1Val,
+            value: this.phaseOne[2],
             title: Text("Week 3",
                 style: TextStyle(color: Colors.white, fontSize: 20)),
-            onChanged: (_weak3Phase1Val) {
+            onChanged: (something) {
               setState(() {
-                this._weak3Phase1Val = _weak3Phase1Val!;
+                this.phaseOne[2] = something!;
               });
             },
           ),
-          
           CheckboxListTile(
             checkColor: kTitleColor,
             activeColor: Colors.white,
             contentPadding: EdgeInsets.only(top: 20, right: 75, left: 75),
-            value: this._weak4Phase1Val,
+            value: this.phaseOne[3],
             title: Text("Week 4",
                 style: TextStyle(color: Colors.white, fontSize: 20)),
-            onChanged: (_weak4Phase1Val) {
+            onChanged: (something) {
               setState(() {
-                this._weak4Phase1Val = _weak4Phase1Val!;
+                this.phaseOne[3] = something!;
               });
             },
           )

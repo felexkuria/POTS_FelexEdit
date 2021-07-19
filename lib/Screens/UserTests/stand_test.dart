@@ -177,30 +177,34 @@ class _StandingTestPageState extends State<StandingTestPage> {
             child: Expanded(
               flex: 1,
               child: Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(color: kTitleColor),
-                  child: GestureDetector(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Generate Workout",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w900,
-                                  fontSize: 20)),
-                        ],
+                width: double.infinity,
+                decoration: BoxDecoration(color: kTitleColor),
+                child: GestureDetector(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Generate Workout",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w900,
+                              fontSize: 20)),
+                    ],
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SchedulePage(
+                            age: age,
+                            suppineHr: suppineHr,
+                            timedHr: tenMinuteHR,
+                            ),
                       ),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SchedulePage(
-                                      age: age,
-                                      suppineHr: suppineHr,
-                                      timedHr: tenMinuteHR,
-                                    )));
-                      })),
+                    );
+                  },
+                ),
+              ),
             ),
           ),
         ],
