@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
+import 'package:pots_new/models/patient.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
 
@@ -8,19 +9,15 @@ class DatabaseHelper {
   static late final DatabaseHelper instance = DatabaseHelper._instance();
   static Database? _database;
   DatabaseHelper._instance();
-  String patientTable = "patientTable";
-  String colId = "id";
-  String colAge = "age";
-  String colSupineHeartRate = "supineHeartRate";
-  String colStatus = "status";
 
 //Patient Tables
 //Id|| Age ||SupineHeartRate ||Status
 //0    ""        ""                ""
 
   Future<Database?> get db async {
-    Database? _database = await _initDb();
-    return _database;
+    if (_database != null) return _database!;
+    _database = await _initDb();
+    return _database!;
   }
 
   Future<Database?> _initDb() async {
@@ -30,15 +27,70 @@ class DatabaseHelper {
     return patientDb;
   }
 
-  void _createDb(Database db, int version) async {
-    await db.execute(
-        "CREATE TABLE $patientTable($colId INTERGER PRIMARY KEY AUTOINCREMENT,$colAge TEXT,$colSupineHeartRate TEXT,$colStatus TEXT)");
+  Future close() async {
+    final db = await instance.db;
+    db!.close();
   }
 
-  Future<List<Map<String, dynamic>>> getPatientList() async {
-    Database? db = await this.db;
+  Future _createDb(Database db, int version) async {
+    final idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
+    // final textType = 'TEXT NOT NULL';
+    final boolType = 'BOOLEAN NOT NULL';
+    final integerType = 'INTEGER NOT NULL';
+    await db.execute('''
+        CREATE TABLE $patientTable(
+        ${PatientFields.columnId} $idType,
+        ${PatientFields.colAge} $integerType,
+        ${PatientFields.colSupineHeartRate} $integerType,
+        ${PatientFields.colStatus} $integerType,
+        ${PatientFields.colIsChecked} $boolType
+        )
+        ''');
+  }
 
-    final List<Map<String, dynamic>> result = await db.query(patientTable);
-    return result;
+  Future<Patient> create(Patient patient) async {
+    final db = await instance.db;
+    final id = await db!.insert(patientTable, patient.toJson());
+    return patient.copy(id: id);
+  }
+
+  Future<Patient> readPatientData(int id) async {
+    final db = await instance.db;
+    final maps = await db?.query(patientTable,
+        columns: PatientFields.values,
+        where: "${PatientFields.columnId}=?",
+        whereArgs: [id]);
+
+    return Patient.fromJson(maps!.first);
+  }
+
+  Future<List<Patient>> readAllPatientData() async {
+    final db = await instance.db;
+
+    final orderBy = '${PatientFields.columnId} ASC';
+
+    final result = await db?.query(patientTable, orderBy: orderBy);
+    return result!.map((json) => Patient.fromJson(json)).toList();
+  }
+
+  Future<int?> delete(int id) async {
+    final db = await instance.db;
+
+    return await db?.delete(
+      patientTable,
+      where: '${PatientFields.columnId} = ?',
+      whereArgs: [id],
+    );
+  }
+
+  Future<int?> update(Patient patient) async {
+    final db = await instance.db;
+
+    return db?.update(
+      patientTable,
+      patient.toJson(),
+      where: '${PatientFields.columnId} = ?',
+      whereArgs: [patient.id],
+    );
   }
 }

@@ -5,7 +5,6 @@ import '../../../constants.dart';
 import '../../Widgets/card.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 
-
 class SupineTest extends StatefulWidget {
   final int age;
   SupineTest({required this.age});
@@ -50,11 +49,8 @@ class _SupineTestState extends State<SupineTest> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    "Lay Down And Click Start When Ready",
-                    textAlign: TextAlign.center,
-                    style: kCardTitleStyle
-                  ),
+                  Text("Lay Down And Click Start When Ready",
+                      textAlign: TextAlign.center, style: kCardTitleStyle),
                   Countdown(
                     controller: _controller,
                     seconds: 5,
@@ -190,10 +186,9 @@ class _SupineTestState extends State<SupineTest> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => StandingTestPage(
-                              age: widget.age.toDouble(),
-                              // suppineHr: supineHeartRate
-                              suppineHeartRate: supineHeartRate.toDouble()
-                            ),
+                                age: widget.age.toDouble(),
+                                // suppineHr: supineHeartRate
+                                suppineHeartRate: supineHeartRate.toDouble()),
                           ),
                         );
                       })),
