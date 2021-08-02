@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pots_new/models/patient.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import '../../../constants.dart';
 import '../../Widgets/card.dart';
@@ -34,6 +35,7 @@ class _StandingTestPageState extends State<StandingTestPage> {
   @override
   Widget build(BuildContext context) {
     //variables which repersent the
+    //late Patient patient;
     int age = widget.age.toInt();
     int suppineHr = widget.suppineHeartRate.toInt();
 

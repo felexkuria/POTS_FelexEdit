@@ -19,7 +19,6 @@ class _MonthOneState extends State<MonthOne> {
 
   @override
   Widget build(BuildContext context) {
-
     TargetHrCalculate usedInScreen = widget.passedBrainObject;
 
     return Material(
@@ -61,31 +60,31 @@ class _MonthOneState extends State<MonthOne> {
                       ),
                     ),
                   ),
-                  Expanded(
-                    flex: 3,
-                    child: ReusableCard(
-                      boxStyle: BoxDecoration(
-                        borderRadius: BorderRadius.circular(borderRadiusCard),
-                        color: Colors.white,
-                      ),
-                      cardChild: Center(
-                          child: Column(
-                        children: [
-                          Text("Exercise Information"),
-                        ],
-                      )
-                          // child: CheckboxListTile(
-                          //   title: const Text('Animate Slowly'),
-                          //   value: true,
-                          //   onChanged: (bool? value) {
-                          //     setState(() {});
-                          //   },
-                          //   secondary: const Icon(Icons.hourglass_empty),
-                          // ),
-                          ),
-                    ),
-                  ),
-                  
+                  // Expanded(
+                  //   flex: 3,
+                  //   child: ReusableCard(
+                  //     boxStyle: BoxDecoration(
+                  //       borderRadius: BorderRadius.circular(borderRadiusCard),
+                  //       color: Colors.white,
+                  //     ),
+                  //     cardChild: Center(
+                  //         child: Column(
+                  //       children: [
+                  //         Text("Exercise Information"),
+                  //         CheckboxListTile(
+                  //           title: const Text('Animate Slowly'),
+                  //           value: true,
+                  //           onChanged: (bool? value) {
+                  //             setState(() {});
+                  //           },
+                  //           secondary: const Icon(Icons.hourglass_empty),
+                  //         ),
+                  //       ],
+                  //     )
+                  //         // child:
+                  //         ),
+                  //   ),
+                  // ),
                 ],
               ),
               SlidingUpPanel(

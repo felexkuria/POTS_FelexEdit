@@ -15,15 +15,17 @@ class DatabaseHelper {
 //0    ""        ""                ""
 
   Future<Database?> get db async {
-    if (_database != null) return _database!;
-    _database = await _initDb();
+    if (_database == null) {
+      _database = await _initDb();
+    }
+
     return _database!;
   }
 
   Future<Database?> _initDb() async {
     Directory directory = await getApplicationDocumentsDirectory();
     String path = directory.path + "patient.db";
-    final patientDb = await openDatabase(path, version: 1, onCreate: _createDb);
+    final patientDb = await openDatabase(path, version: 10, onCreate: createDb);
     return patientDb;
   }
 
@@ -32,9 +34,9 @@ class DatabaseHelper {
     db!.close();
   }
 
-  Future _createDb(Database db, int version) async {
+  Future createDb(Database db, int version) async {
     final idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
-    // final textType = 'TEXT NOT NULL';
+
     final boolType = 'BOOLEAN NOT NULL';
     final integerType = 'INTEGER NOT NULL';
     await db.execute('''
@@ -43,54 +45,70 @@ class DatabaseHelper {
         ${PatientFields.colAge} $integerType,
         ${PatientFields.colSupineHeartRate} $integerType,
         ${PatientFields.colStatus} $integerType,
-        ${PatientFields.colIsChecked} $boolType
+        ${PatientFields.colIsChecked} $integerType
         )
         ''');
   }
 
-  Future<Patient> create(Patient patient) async {
-    final db = await instance.db;
-    final id = await db!.insert(patientTable, patient.toJson());
-    return patient.copy(id: id);
+  Future<int?> createPatient(Patient patient) async {
+    final db = await this.db;
+    final int? result = await db?.insert(patientTable, patient.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
+    //
+    return result;
   }
 
-  Future<Patient> readPatientData(int id) async {
-    final db = await instance.db;
-    final maps = await db?.query(patientTable,
-        columns: PatientFields.values,
-        where: "${PatientFields.columnId}=?",
-        whereArgs: [id]);
-
-    return Patient.fromJson(maps!.first);
-  }
-
-  Future<List<Patient>> readAllPatientData() async {
-    final db = await instance.db;
+  Future<List<Map<String, Object?>>?>? readAllPatientData() async {
+    final db = await this.db;
 
     final orderBy = '${PatientFields.columnId} ASC';
+    final completedTest = '${PatientFields.colIsChecked}==0';
 
-    final result = await db?.query(patientTable, orderBy: orderBy);
-    return result!.map((json) => Patient.fromJson(json)).toList();
+    final result =
+        await db?.query(patientTable, orderBy: orderBy, where: completedTest);
+    return result;
+  }
+
+  Future<List<Map<String, Object?>>?>? sortAllPatientData() async {
+    final db = await this.db;
+
+    //final orderBy = '${PatientFields.columnId} ASC';
+    final completedTest = '${PatientFields.colIsChecked}==0';
+
+    final result = await db?.query(patientTable, where: completedTest);
+    return result;
+  }
+
+  Future<List<Patient>> getPatientList() async {
+    final patientList = await readAllPatientData();
+
+    final List<Patient> listPatient = [];
+    patientList?.forEach((patientMap) {
+      listPatient.add(Patient.fromMap(patientMap));
+    });
+    return listPatient;
   }
 
   Future<int?> delete(int id) async {
-    final db = await instance.db;
+    final db = await this.db;
 
-    return await db?.delete(
+    final int? result = await db?.delete(
       patientTable,
       where: '${PatientFields.columnId} = ?',
       whereArgs: [id],
     );
+    return result;
   }
 
   Future<int?> update(Patient patient) async {
-    final db = await instance.db;
+    final db = await this.db;
 
-    return db?.update(
+    final int? result = await db?.update(
       patientTable,
-      patient.toJson(),
+      patient.toMap(),
       where: '${PatientFields.columnId} = ?',
       whereArgs: [patient.id],
     );
+    return result;
   }
 }

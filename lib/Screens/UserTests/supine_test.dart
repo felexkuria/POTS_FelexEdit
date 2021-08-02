@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:pots_new/Screens/UserTests/stand_test.dart';
+import 'package:pots_new/models/patient.dart';
 import 'package:timer_count_down/timer_controller.dart';
+import 'package:timer_count_down/timer_count_down.dart';
+
+import 'package:pots_new/Screens/UserTests/stand_test.dart';
+
 import '../../../constants.dart';
 import '../../Widgets/card.dart';
-import 'package:timer_count_down/timer_count_down.dart';
 
 class SupineTest extends StatefulWidget {
   final int age;
-  SupineTest({required this.age});
+
+  const SupineTest({
+    Key? key,
+    required this.age,
+  }) : super(key: key);
 
   @override
   _SupineTestState createState() => _SupineTestState();
@@ -27,6 +34,7 @@ class _SupineTestState extends State<SupineTest> {
   //works to hide and unhide the bottom button and the HR after 10 minutes
   bool isVisible = false;
   bool generateWorkoutIsVisible = false;
+  late final Patient patient;
 
   @override
   Widget build(BuildContext context) {
