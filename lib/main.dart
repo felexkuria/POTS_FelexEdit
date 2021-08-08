@@ -34,51 +34,8 @@ class _MyAppState extends State<MyApp> {
 
   bool isLoading = true;
 
-  Futureect?
-
-  >
-
-  >
-
-  ?
-
-  >
-
-  ?
-
-  _patientData
-
-  ;
-
-  <
-
-  List
-
-  <
-
-  Map
-
-  <
-
-  String
-
-  ,
-
-  Obj
-  Future
-
-  <
-
-  List<Patient>?
-
-  >
-
-  ?
-
-  patientList
-
-  ;
-
+Future <List<Map<String, Object?>>?>? _patientData;
+  Future<List<Patient>>? patientList;
   Future refreshPatient() async {
     this._patientData =
         DatabaseHelper.instance.readAllPatientData()!.whenComplete(() {

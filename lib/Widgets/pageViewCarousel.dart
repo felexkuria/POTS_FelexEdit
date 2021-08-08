@@ -149,24 +149,7 @@ class _PageViewCarouselState extends State<PageViewCarousel> {
                   ),
                 ),
                 //SizedBox(height: 20,),
-                TextButton(
-                    child: Text(
-                      'Done',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.white),
-                    ),
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.only(right: 16, left: 16),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(30))),
 
-                      primary: kTitleColor,
-                      //minimumSize:Size(10,20) ,
-                    )),
               ]),
             ),
           );
@@ -334,25 +317,7 @@ class _PageViewCarouselState extends State<PageViewCarousel> {
                       ),
                     ),
                     //SizedBox(height: 20,),
-                    TextButton(
-                        child: Text(
-                          'Done',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.white),
-                        ),
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.only(right: 16, left: 16),
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(30))),
 
-                          primary: kTitleColor,
-                          //minimumSize:Size(10,20) ,
-                        )),
                   ]),
             ),
           );
