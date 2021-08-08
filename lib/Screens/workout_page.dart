@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:get/get.dart';
 import 'package:pots_new/Screens/MonthlyWorkoutFiles/PhaseOneScreens/monthOne.dart';
-import 'package:pots_new/helpers/databaseHelpers.dart';
-import 'package:pots_new/models/patient.dart';
-import '../brains.dart';
-import '../Widgets/progress.dart';
-import '../constants.dart';
+
+import '/Widgets/monthCard.dart';
 import '../Widgets/card.dart';
+import '../brains.dart';
+import '../constants.dart';
+import 'MonthlyWorkoutFiles/PhaseThreeScreens/monthFive.dart';
+import 'MonthlyWorkoutFiles/PhaseThreeScreens/monthFour.dart';
+import 'MonthlyWorkoutFiles/PhaseThreeScreens/monthSix.dart';
 import 'MonthlyWorkoutFiles/PhaseTwoScreens/monthThree.dart';
 import 'MonthlyWorkoutFiles/PhaseTwoScreens/monthTwo.dart';
-import 'MonthlyWorkoutFiles/PhaseThreeScreens/monthFour.dart';
-import 'MonthlyWorkoutFiles/PhaseThreeScreens/monthFive.dart';
-import 'MonthlyWorkoutFiles/PhaseThreeScreens/monthSix.dart';
-import '/Widgets/monthCard.dart';
+import 'Update/updateScreen.dart';
 
 //Design One: The First UI with the month based System
 
@@ -32,43 +31,7 @@ class SchedulePage extends StatefulWidget {
 }
 
 class _SchedulePageState extends State<SchedulePage> {
-  late Future<List<Map<String, Object?>>?>? _patientData;
-  late Future<List<Patient>?>? patientList;
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    //DatabaseHelper.instance.close();
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-
-    refereshAndCreatePatient();
-    //updatePatientList();
-  }
-
   // ss
-  Future refereshAndCreatePatient() async {
-    this._patientData =
-        DatabaseHelper.instance.readAllPatientData()!.whenComplete(() {
-      this.patientList = DatabaseHelper.instance.getPatientList();
-      setState(() {});
-    });
-
-    Patient patient = Patient(
-        // id: autoIncrement,
-        age: widget.age,
-        supineHeartRate: widget.suppineHr,
-        isChecked: 0,
-        status: widget.timedHr);
-    DatabaseHelper.instance.createPatient(patient).whenComplete(() {
-      setState(() {});
-      //print(patient.id);
-    });
-  }
 
   @override
   // DateTime now = new DateTime.now();
@@ -79,57 +42,114 @@ class _SchedulePageState extends State<SchedulePage> {
     TargetHrCalculate provider =
         new TargetHrCalculate(age: age, tenHr: timedHr, suppineHr: suppineHr);
     return Scaffold(
-        appBar: AppBar(
-            leading: IconButton(
-                onPressed: () async {
-                  // Navigator.pop(context);
-                  await DatabaseHelper.instance.delete(10).whenComplete(() {
-                    setState(() {});
-                  });
-                },
-                icon: Icon(
-                  Icons.delete_forever,
-                  color: Colors.black,
-                )),
-            elevation: 0,
-            title: Text("'POTS APP'",
-                style: TextStyle(
-                    color: kTitleColor,
-                    fontWeight: FontWeight.w900,
-                    fontSize: 30))),
-        body: FutureBuilder(
-            future: DatabaseHelper.instance.readAllPatientData(),
-            builder: (context, AsyncSnapshot snapshot) {
-              if (!snapshot.hasData) {
-                return Center(child: CircularProgressIndicator());
-              }
+      appBar: AppBar(
+          leading: IconButton(
+              onPressed: () {
+                Get.to(() => UpdateScreen(
+                      age: age,
+                      timedHr: timedHr,
+                      suppineHr: suppineHr,
+                    ));
+              },
+              icon: Icon(
+                Icons.menu,
+                size: 30.0,
+                color: kTitleColor,
+              )),
+          elevation: 0,
+          title: Text("POTS APP",
+              style: TextStyle(
+                  color: kTitleColor,
+                  fontWeight: FontWeight.w900,
+                  fontSize: 30))),
+      body: ListView(
+        children: [
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            color: kTitleColor,
+            child: Center(
+              child: Text("Phase 1",
+                  style: TextStyle(
+                    fontSize: 30,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  )),
+            ),
+          ),
+          //MonthCard is in Widgets folder
+          MonthCard(
+            monthName: "Month 1",
+            namedRoute: MonthOne(
+              passedBrainObject: provider,
+            ),
+          ),
 
-              if (snapshot.hasData) {
-                return StaggeredGridView.countBuilder(
-                  crossAxisCount: 4,
-                  mainAxisSpacing: 4,
-                  crossAxisSpacing: 4,
-                  itemBuilder: (context, index) {
-                    Map<String, dynamic> data = snapshot.data[index];
-                    return Container(
-                      color: kTitleColor,
-                      child: Center(
-                        child: Text("age ${data["age"]}",
-                            style: TextStyle(
-                              fontSize: 30,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                            )),
-                      ),
-                    );
-                  },
-                  padding: EdgeInsets.all(8),
-                  itemCount: snapshot.data.length,
-                  staggeredTileBuilder: (index) => StaggeredTile.fit(2),
-                );
-              }
-              return Center(child: CircularProgressIndicator());
-            }));
+          SizedBox(
+            height: 20,
+          ),
+
+          Container(
+            color: kTitleColor,
+            child: Center(
+              child: Text("Phase 2",
+                  style: TextStyle(
+                    fontSize: 30,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  )),
+            ),
+          ),
+
+          MonthCard(
+            monthName: "Month 2",
+            namedRoute: MonthTwo(
+              passedBrainObject: provider,
+            ),
+          ),
+
+          MonthCard(
+            monthName: "Month 3",
+            namedRoute: MonthThree(
+              passedBrainObject: provider,
+            ),
+          ),
+
+          Container(
+            margin: EdgeInsets.only(top: 20),
+            color: kTitleColor,
+            child: Center(
+              child: Text("Phase 3",
+                  style: TextStyle(
+                    fontSize: 30,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  )),
+            ),
+          ),
+
+          MonthCard(
+            monthName: "Month 4",
+            namedRoute: MonthFour(
+                // passedBrainObject: provider,
+                ),
+          ),
+          MonthCard(
+            monthName: "Month 5",
+            namedRoute: MonthFive(
+                // passedBrainObject: provider,
+                ),
+          ),
+          MonthCard(
+            monthName: "Month 6",
+            namedRoute: MonthSix(
+                // passedBrainObject: provider,
+                ),
+          ),
+        ],
+      ),
+    );
   }
 }
 

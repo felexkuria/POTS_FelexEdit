@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:pots_new/helpers/databaseHelpers.dart';
 import 'package:pots_new/models/patient.dart';
 import 'package:timer_count_down/timer_controller.dart';
+import 'package:timer_count_down/timer_count_down.dart';
+
 import '../../../constants.dart';
 import '../../Widgets/card.dart';
-import 'package:timer_count_down/timer_count_down.dart';
 import '../workout_page.dart';
 
 class StandingTestPage extends StatefulWidget {
   StandingTestPage({required this.age, required this.suppineHeartRate});
+
   final double age;
   final double suppineHeartRate;
 
@@ -31,6 +34,45 @@ class _StandingTestPageState extends State<StandingTestPage> {
   bool generateWorkoutIsVisible = false;
 
   //assigning variables from object something to values
+  Future<List<Map<String, Object?>>?>? _patientData;
+  Future<List<Patient>?>? patientList;
+
+  Future refreshAndCreatePatient(
+      int age, int suppineHeartRate, int timedHr) async {
+    this._patientData =
+        DatabaseHelper.instance.readAllPatientData()!.whenComplete(() {
+      this.patientList = DatabaseHelper.instance.getPatientList();
+      setState(() {});
+    });
+
+    Patient patient = Patient(
+        // id: autoIncrement,
+        age: age,
+        supineHeartRate: suppineHeartRate,
+        isChecked: 0,
+        status: timedHr);
+    DatabaseHelper.instance.createPatient(patient).whenComplete(() {
+      setState(() {});
+
+      //print(patient.id);
+    });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+
+    super.dispose();
+    DatabaseHelper.instance.close();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    //updatePatientList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -193,15 +235,16 @@ class _StandingTestPageState extends State<StandingTestPage> {
                               fontSize: 20)),
                     ],
                   ),
-                  onTap: () {
+                  onTap: () async {
+                    await refreshAndCreatePatient(age, suppineHr, tenMinuteHR);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => SchedulePage(
-                            age: age,
-                            suppineHr: suppineHr,
-                            timedHr: tenMinuteHR,
-                            ),
+                          age: age,
+                          suppineHr: suppineHr,
+                          timedHr: tenMinuteHR,
+                        ),
                       ),
                     );
                   },

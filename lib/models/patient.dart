@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 final String patientTable = "patientTable";
 
 class PatientFields {
@@ -50,6 +48,7 @@ class Patient {
         isChecked: map["isChecked"],
         status: map["status"]);
   }
+
   // Patient copy({int? id, int? status, bool? isChecked, int? supineHeartRate}) =>
   //     Patient(
   //       id: id ?? this.id,
@@ -58,13 +57,13 @@ class Patient {
   //       isChecked: isChecked ?? this.isChecked,
   //       age: age ,
   //     );
-  // static Patient fromJson(Map<String, Object?> json) => Patient(
-  //       id: json[PatientFields.columnId] as int?,
-  //       age: json[PatientFields.colAge] as int,
-  //       supineHeartRate: json[PatientFields.colSupineHeartRate] as int,
-  //       isChecked: json[PatientFields.colIsChecked] == 1,
-  //       status: json[PatientFields.colStatus] as int,
-  //     );
+  static Patient fromJson(Map<String, Object?> json) => Patient(
+        id: json[PatientFields.columnId] as int?,
+        age: json[PatientFields.colAge] as int,
+        supineHeartRate: json[PatientFields.colSupineHeartRate] as int,
+        isChecked: json[PatientFields.colIsChecked] as int,
+        status: json[PatientFields.colStatus] as int,
+      );
   //
   // Map<String, Object?> toJson() => {
   //       PatientFields.columnId: id,

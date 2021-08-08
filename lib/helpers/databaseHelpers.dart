@@ -5,6 +5,9 @@ import 'package:pots_new/models/patient.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
 
+/*Create A Class called Database Helper  this class will
+* store all the methods to be  used in create a table :insert data ,ordering data deleting data and etc
+*  */
 class DatabaseHelper {
   static late final DatabaseHelper instance = DatabaseHelper._instance();
   static Database? _database;
@@ -62,18 +65,18 @@ class DatabaseHelper {
     final db = await this.db;
 
     final orderBy = '${PatientFields.columnId} ASC';
-    final completedTest = '${PatientFields.colIsChecked}==0';
 
-    final result =
-        await db?.query(patientTable, orderBy: orderBy, where: completedTest);
+    final result = await db?.query(
+      patientTable,
+      orderBy: orderBy,
+    );
     return result;
   }
 
   Future<List<Map<String, Object?>>?>? sortAllPatientData() async {
     final db = await this.db;
 
-    //final orderBy = '${PatientFields.columnId} ASC';
-    final completedTest = '${PatientFields.colIsChecked}==0';
+    final completedTest = '${PatientFields.colAge}<=${PatientFields.colAge}';
 
     final result = await db?.query(patientTable, where: completedTest);
     return result;
@@ -100,15 +103,15 @@ class DatabaseHelper {
     return result;
   }
 
-  Future<int?> update(Patient patient) async {
+  Future<int?> update(
+      {required int suppineHr, required int age, required int status}) async {
     final db = await this.db;
 
-    final int? result = await db?.update(
-      patientTable,
-      patient.toMap(),
-      where: '${PatientFields.columnId} = ?',
-      whereArgs: [patient.id],
-    );
+    final int? result = await db?.rawUpdate('''
+    UPDATE $patientTable
+    SET  ${PatientFields.colSupineHeartRate} =?,  ${PatientFields.colAge} = ?, ${PatientFields.colStatus} =?
+    WHERE  ${PatientFields.columnId} =1 
+    ''', [suppineHr, age, status]);
     return result;
   }
 }
