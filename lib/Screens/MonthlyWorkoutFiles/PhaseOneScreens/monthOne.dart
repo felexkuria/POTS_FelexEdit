@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pots_new/helpers/databaseHelpers.dart';
+import 'package:pots_new/models/patient.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../../../constants.dart';
 import '../../../brains.dart';
@@ -16,94 +18,117 @@ class MonthOne extends StatefulWidget {
 class _MonthOneState extends State<MonthOne> {
   // ignore: deprecated_member_use
   var isCheckedList = [false, false, false, false, false, false, false, false];
+  Future<List<Patient>?>? patientList;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    updatePatientList();
+  }
+
+  Future updatePatientList() async {
+    DatabaseHelper.instance.getPatientList().whenComplete(() {
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     TargetHrCalculate usedInScreen = widget.passedBrainObject;
 
-    return Material(
-      child: SlidingUpPanel(
-        backdropEnabled: true,
-        renderPanelSheet: false,
-        maxHeight: 750, //make sure to
-        panel: opened(),
-        collapsed: _floatingCollapsed(),
-        body: Scaffold(
-          appBar: AppBar(
-            elevation: 0,
-            title: Text(
-              'Month 1',
-              style: TextStyle(
-                color: kTitleColor,
-                fontWeight: FontWeight.w900,
-                fontSize: 30,
+    return FutureBuilder<List<Map<String, Object?>>?>(
+        future: DatabaseHelper.instance.readAllPatientData(),
+        builder: (context, snapshot) {
+          return Material(
+            child: SlidingUpPanel(
+              backdropEnabled: true,
+              renderPanelSheet: false,
+              maxHeight: 750, //make sure to
+              panel: opened(
+                asyncSnapshot: snapshot,
               ),
-            ),
-          ),
-          body: Stack(
-            children: <Widget>[
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Expanded(
-                    flex: 1,
-                    child: ReusableCard(
-                      cardChild: Column(
-                        children: [
-                          Text("Reccomended Exercises"),
-                          Text("Rowing, Swimming, Inclined Biking")
-                        ],
-                      ),
-                      boxStyle: BoxDecoration(
-                        borderRadius: BorderRadius.circular(borderRadiusCard),
-                        color: Colors.white,
-                      ),
+              collapsed: _floatingCollapsed(),
+              body: Scaffold(
+                appBar: AppBar(
+                  elevation: 0,
+                  title: Text(
+                    'Month 1',
+                    style: TextStyle(
+                      color: kTitleColor,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 30,
                     ),
                   ),
-                  // Expanded(
-                  //   flex: 3,
-                  //   child: ReusableCard(
-                  //     boxStyle: BoxDecoration(
-                  //       borderRadius: BorderRadius.circular(borderRadiusCard),
-                  //       color: Colors.white,
-                  //     ),
-                  //     cardChild: Center(
-                  //         child: Column(
-                  //       children: [
-                  //         Text("Exercise Information"),
-                  //         CheckboxListTile(
-                  //           title: const Text('Animate Slowly'),
-                  //           value: true,
-                  //           onChanged: (bool? value) {
-                  //             setState(() {});
-                  //           },
-                  //           secondary: const Icon(Icons.hourglass_empty),
-                  //         ),
-                  //       ],
-                  //     )
-                  //         // child:
-                  //         ),
-                  //   ),
-                  // ),
-                ],
+                ),
+                body: Stack(
+                  children: <Widget>[
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        Expanded(
+                          flex: 1,
+                          child: ReusableCard(
+                            cardChild: Column(
+                              children: [
+                                Text("Reccomended Exercises"),
+                                Text("Rowing, Swimming, Inclined Biking")
+                              ],
+                            ),
+                            boxStyle: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.circular(borderRadiusCard),
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        // Expanded(
+                        //   flex: 3,
+                        //   child: ReusableCard(
+                        //     boxStyle: BoxDecoration(
+                        //       borderRadius: BorderRadius.circular(borderRadiusCard),
+                        //       color: Colors.white,
+                        //     ),
+                        //     cardChild: Center(
+                        //         child: Column(
+                        //       children: [
+                        //         Text("Exercise Information"),
+                        //         CheckboxListTile(
+                        //           title: const Text('Animate Slowly'),
+                        //           value: true,
+                        //           onChanged: (bool? value) {
+                        //             setState(() {});
+                        //           },
+                        //           secondary: const Icon(Icons.hourglass_empty),
+                        //         ),
+                        //       ],
+                        //     )
+                        //         // child:
+                        //         ),
+                        //   ),
+                        // ),
+                      ],
+                    ),
+                    SlidingUpPanel(
+                      // slideDirection: SlideDirection.DOWN,
+                      renderPanelSheet: false,
+                      maxHeight: 750, //make sure to
+                      panel: opened(
+                        asyncSnapshot: snapshot,
+                      ),
+                      collapsed: _floatingCollapsed(),
+                    ),
+                  ],
+                ),
               ),
-              SlidingUpPanel(
-                // slideDirection: SlideDirection.DOWN,
-                renderPanelSheet: false,
-                maxHeight: 750, //make sure to
-                panel: opened(),
-                collapsed: _floatingCollapsed(),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          );
+        });
   }
 }
 
 class opened extends StatefulWidget {
-  const opened({Key? key}) : super(key: key);
+  final AsyncSnapshot<List<Map<String, Object?>>?> asyncSnapshot;
+  const opened({Key? key, required this.asyncSnapshot}) : super(key: key);
 
   @override
   _openedState createState() => _openedState();
@@ -111,6 +136,7 @@ class opened extends StatefulWidget {
 
 class _openedState extends State<opened> {
   List<bool> phaseOne = [false, false, false, false];
+  List<bool> checkedBool = [true, true, true, true];
 
   @override
   Widget build(BuildContext context) {
@@ -159,55 +185,135 @@ class _openedState extends State<opened> {
           CheckboxListTile(
             checkColor: kTitleColor,
             activeColor: Colors.white,
-            contentPadding: EdgeInsets.only(top: 50, right: 75, left: 75),
-            value: phaseOne[0],
-            title: Text("Week 1",
-                style: TextStyle(color: Colors.white, fontSize: 20)),
-            onChanged: (something) {
-              setState(() {
-                this.phaseOne[0] = something!;
-              });
+            contentPadding: EdgeInsets.only(top: 20, right: 75, left: 75),
+            value: widget.asyncSnapshot.data![0]["isChecked"] as int == 1
+                ? this.checkedBool[1]
+                : this.phaseOne[1],
+            //value: this.phaseOne[1],
+            title: Text(
+              "Week 1",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                decoration:
+                    widget.asyncSnapshot.data![0]["isChecked"] as int == 0
+                        ? TextDecoration.none
+                        : TextDecoration.lineThrough,
+              ),
+            ),
+            onChanged: (bool? newValue) {
+              if (newValue = true) {
+                print(widget.asyncSnapshot.data.toString());
+                DatabaseHelper.instance
+                    .updateProgress(ischecked: 1)
+                    .whenComplete(() {
+                  setState(() {
+                    this.phaseOne[1] = newValue!;
+                  });
+                });
+                DatabaseHelper.instance.readAllPatientData();
+              }
             },
           ),
           CheckboxListTile(
             checkColor: kTitleColor,
             activeColor: Colors.white,
             contentPadding: EdgeInsets.only(top: 20, right: 75, left: 75),
+            // value: widget.asyncSnapshot.data![0]["isChecked"] as int == 1
+            //     ? this.checkedBool[1]
+            //     : this.phaseOne[1],
             value: this.phaseOne[1],
-            title: Text("Week 2",
-                style: TextStyle(color: Colors.white, fontSize: 20)),
-            onChanged: (something) {
-              setState(() {
-                this.phaseOne[1] = something!;
-              });
+            title: Text(
+              "Week 2",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                // decoration:
+                //     widget.asyncSnapshot.data![0]["isChecked"] as int == 0
+                //         ? TextDecoration.none
+                //         : TextDecoration.lineThrough,
+              ),
+            ),
+            onChanged: (bool? newValue) {
+              // if (newValue = true) {
+              //   print(widget.asyncSnapshot.data.toString());
+              //   DatabaseHelper.instance
+              //       .updateProgress(ischecked: 1)
+              //       .whenComplete(() {
+              //     setState(() {
+              //       this.phaseOne[1] = newValue!;
+              //     });
+              //   });
+              //   DatabaseHelper.instance.readAllPatientData();
+              // }
             },
           ),
           CheckboxListTile(
             checkColor: kTitleColor,
             activeColor: Colors.white,
             contentPadding: EdgeInsets.only(top: 20, right: 75, left: 75),
-            value: this.phaseOne[2],
-            title: Text("Week 3",
-                style: TextStyle(color: Colors.white, fontSize: 20)),
-            onChanged: (something) {
-              setState(() {
-                this.phaseOne[2] = something!;
-              });
+            // value: widget.asyncSnapshot.data![0]["isChecked"] as int == 1
+            //     ? this.checkedBool[1]
+            //     : this.phaseOne[1],
+            value: this.phaseOne[1],
+            title: Text(
+              "Week 3",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                // decoration:
+                //     widget.asyncSnapshot.data![0]["isChecked"] as int == 0
+                //         ? TextDecoration.none
+                //         : TextDecoration.lineThrough,
+              ),
+            ),
+            onChanged: (bool? newValue) {
+              // if (newValue = true) {
+              //   print(widget.asyncSnapshot.data.toString());
+              //   DatabaseHelper.instance
+              //       .updateProgress(ischecked: 1)
+              //       .whenComplete(() {
+              //     setState(() {
+              //       this.phaseOne[1] = newValue!;
+              //     });
+              //   });
+              //   DatabaseHelper.instance.readAllPatientData();
+              // }
             },
           ),
           CheckboxListTile(
             checkColor: kTitleColor,
             activeColor: Colors.white,
             contentPadding: EdgeInsets.only(top: 20, right: 75, left: 75),
-            value: this.phaseOne[3],
-            title: Text("Week 4",
-                style: TextStyle(color: Colors.white, fontSize: 20)),
-            onChanged: (something) {
-              setState(() {
-                this.phaseOne[3] = something!;
-              });
+            // value: widget.asyncSnapshot.data![0]["isChecked"] as int == 1
+            //     ? this.checkedBool[1]
+            //     : this.phaseOne[1],
+            value: this.phaseOne[1],
+            title: Text(
+              "Week 4",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                // decoration:
+                //     widget.asyncSnapshot.data![0]["isChecked"] as int == 0
+                //         ? TextDecoration.none
+                //         : TextDecoration.lineThrough,
+              ),
+            ),
+            onChanged: (bool? newValue) {
+              // if (newValue = true) {
+              //   print(widget.asyncSnapshot.data.toString());
+              //   DatabaseHelper.instance
+              //       .updateProgress(ischecked: 1)
+              //       .whenComplete(() {
+              //     setState(() {
+              //       this.phaseOne[1] = newValue!;
+              //     });
+              //   });
+              //   DatabaseHelper.instance.readAllPatientData();
+              // }
             },
-          )
+          ),
         ],
       ),
     );

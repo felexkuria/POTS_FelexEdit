@@ -83,10 +83,10 @@ class DatabaseHelper {
   }
 
   Future<List<Patient>> getPatientList() async {
-    final patientList = await readAllPatientData();
+    final patientMapList = await readAllPatientData();
 
     final List<Patient> listPatient = [];
-    patientList?.forEach((patientMap) {
+    patientMapList?.forEach((patientMap) {
       listPatient.add(Patient.fromMap(patientMap));
     });
     return listPatient;
@@ -112,6 +112,17 @@ class DatabaseHelper {
     SET  ${PatientFields.colSupineHeartRate} =?,  ${PatientFields.colAge} = ?, ${PatientFields.colStatus} =?
     WHERE  ${PatientFields.columnId} =1 
     ''', [suppineHr, age, status]);
+    return result;
+  }
+
+  Future<int?> updateProgress({required int ischecked}) async {
+    final db = await this.db;
+
+    final int? result = await db?.rawUpdate('''
+    UPDATE $patientTable
+    SET ${PatientFields.colIsChecked} =?
+    WHERE  ${PatientFields.columnId} =1 
+    ''', [ischecked]);
     return result;
   }
 }

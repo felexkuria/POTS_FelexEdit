@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pots_new/Screens/MonthlyWorkoutFiles/PhaseOneScreens/monthOne.dart';
+import 'package:pots_new/Screens/Update/updateScreen.dart';
+import 'package:pots_new/Widgets/pageViewCarousel.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '/Widgets/monthCard.dart';
 import '../Widgets/card.dart';
@@ -11,7 +14,6 @@ import 'MonthlyWorkoutFiles/PhaseThreeScreens/monthFour.dart';
 import 'MonthlyWorkoutFiles/PhaseThreeScreens/monthSix.dart';
 import 'MonthlyWorkoutFiles/PhaseTwoScreens/monthThree.dart';
 import 'MonthlyWorkoutFiles/PhaseTwoScreens/monthTwo.dart';
-import 'Update/updateScreen.dart';
 
 //Design One: The First UI with the month based System
 
@@ -26,36 +28,43 @@ class SchedulePage extends StatefulWidget {
 
   final int suppineHr;
   final int timedHr;
+
   @override
   _SchedulePageState createState() => _SchedulePageState();
 }
 
 class _SchedulePageState extends State<SchedulePage> {
+  @override
+  void initState() {
+    super.initState();
+  }
   // ss
 
   @override
   // DateTime now = new DateTime.now();
   Widget build(BuildContext context) {
     final int age = widget.age;
+
     final int suppineHr = widget.suppineHr;
     final int timedHr = widget.timedHr;
     TargetHrCalculate provider =
         new TargetHrCalculate(age: age, tenHr: timedHr, suppineHr: suppineHr);
     return Scaffold(
       appBar: AppBar(
-          leading: IconButton(
-              onPressed: () {
-                Get.to(() => UpdateScreen(
-                      age: age,
-                      timedHr: timedHr,
-                      suppineHr: suppineHr,
-                    ));
-              },
-              icon: Icon(
-                Icons.menu,
-                size: 30.0,
-                color: kTitleColor,
-              )),
+          leading: Builder(
+              builder: (context) => IconButton(
+                  onPressed: () {
+                    Get.to(() => UpdateScreen(
+                          age: age,
+                          timedHr: timedHr,
+                          suppineHr: suppineHr,
+                        ));
+                  },
+                  icon: Icon(
+                    Icons.menu,
+                    size: 30.0,
+                    color: kTitleColor,
+                  ))),
           elevation: 0,
           title: Text("POTS APP",
               style: TextStyle(
